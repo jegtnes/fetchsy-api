@@ -14,11 +14,36 @@ router.get('/', function(req, res) {
   });
 });
 
+
+router.put('/:subscriptionId', function(req, res) {
+  console.log('wqhuu');
+  Subscription.findById(req.params.subscriptionId, function(err, subscription) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    if (req.body.frequency === false && req.body.shopName === false) {
+      return res.status(400).json({message: 'Missing fields, dawg'});
+    }
+
+    subscription.frequency = req.body.frequency || subscription.frequency;
+    subscription.shopName = req.body.shopName || subscription.shopName;
+
+    subscription.save(function(err) {
+      if (err) {
+        res.send(err);
+      }
+
+      return res.json(subscription);
+    });
+  });
+});
+
+
 router.post('/', function(req, res) {
   var subscription = new Subscription();
   if (req.body.shopname != false && !req.body.frequency != false) {
-    res.status(400);
-    res.json({message: 'Missing fields dawg'});
+    return res.status(400).json({message: 'Missing fields dawg'});
   }
 
   subscription.shopName = req.body.shopName;
@@ -27,14 +52,21 @@ router.post('/', function(req, res) {
 
   subscription.save(function(err) {
     if (err) {
-      res.send(err);
+      return res.status(500).send(err);
     }
 
-    res.json({
+    return res.json({
       message: 'Subscription added',
       data: subscription
     });
   });
+
+  router.get('/:subscriptionId', function(req, res) {
+    console.log('jesus');
+    res.json({jesus: true});
+  })
+
+
 });
 
 module.exports = router;
