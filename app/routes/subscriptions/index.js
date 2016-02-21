@@ -16,10 +16,14 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   var subscription = new Subscription();
+  if (req.body.shopname != false && !req.body.frequency != false) {
+    res.status(400);
+    res.json({message: 'Missing fields dawg'});
+  }
 
   subscription.shopName = req.body.shopName;
   subscription.frequency = req.body.frequency;
-  subscription.lastChecked = req.body.lastChecked;
+  subscription.lastChecked = Date.now();
 
   subscription.save(function(err) {
     if (err) {
