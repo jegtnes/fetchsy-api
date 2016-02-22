@@ -29,7 +29,7 @@ router.post('/', function(req, res) {
       return res.status(500).send(err);
     }
 
-    return res.json({
+    return res.status(200).json({
       message: 'Subscription added',
       data: subscription
     });
@@ -37,7 +37,6 @@ router.post('/', function(req, res) {
 });
 
 router.put('/:subscriptionId', function(req, res) {
-  console.log('wqhuu');
   Subscription.findById(req.params.subscriptionId, function(err, subscription) {
     if (err) {
       return res.status(500).send(err);
