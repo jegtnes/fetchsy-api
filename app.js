@@ -2,7 +2,8 @@ var express =      require('express');
 var mongoose =     require('mongoose');
 var bodyParser =   require('body-parser');
 
-var conf =         require('./app/config')
+var conf =         require('./app/config');
+var env =          require('./app/env');
 var router =       require('./app/routes/index');
 
 var Subscription = require('./app/models/subscription');
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use('/api/v1', router);
+app.use(env.apiSuffix, router);
 
 app.listen(conf.get('port'));
 console.log('Listening on', + conf.get('port'));

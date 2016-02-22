@@ -12,11 +12,22 @@ var conf = convict({
     format: "port",
     default: 3456,
     env: "PORT"
+  },
+  rootURL: {
+    doc: "The root URL, complete with protocol.",
+    format: "url",
+    default: "http://localhost"
+  },
+  apiSuffix: {
+    doc: "The suffix URL fragment to access the API.",
+    format: String,
+    default: "/api/v1/"
   }
 });
 
 var env = conf.get('env');
 conf.loadFile('.' + env + '.config.json');
+
 conf.validate({strict: true});
 
 module.exports = conf;
