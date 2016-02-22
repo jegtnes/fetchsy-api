@@ -1,5 +1,6 @@
 var express = require('express');
 
+var env     = require('../../env');
 var Subscription = require('../../models/subscription.js');
 
 var router = express.Router();
@@ -45,10 +46,9 @@ router.post('/', function(req, res) {
       return res.status(500).send(err);
     }
 
-    return res.status(200).json({
-      message: 'Subscription added',
-      data: subscription
-    });
+    resourceURI = env.apiURL + '/subscriptions/' + subscription._id;
+
+    return res.status(201).header('Location', resourceURI).end();
   });
 });
 
