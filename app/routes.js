@@ -1,6 +1,6 @@
 var express = require('express');
 
-var subscriptionsRoute = require('./controllers/subscriptions.js');
+var subscriptionsRoute = require('./controllers/subscription.js');
 
 var router = express.Router();
 
