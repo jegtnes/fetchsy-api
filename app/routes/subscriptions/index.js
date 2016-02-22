@@ -14,6 +14,22 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/:subscriptionId', function(req, res) {
+  Subscription.findById(req.params.subscriptionId, function(err, subscription) {
+    if (!subscription) {
+      return res.status(404).send({
+        message: "Can't find the subscription."
+      });
+    }
+
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    return res.json(subscription);
+  });
+});
+
 router.post('/', function(req, res) {
   var subscription = new Subscription();
   if (req.body.shopname != false && !req.body.frequency != false) {
