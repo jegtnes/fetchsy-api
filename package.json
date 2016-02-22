@@ -5,10 +5,11 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "convict": "^1.1.2",
     "express": "^4.13.4",
     "jsonwebtoken": "^5.7.0",
-    "morgan": "^1.6.1",
-    "mongoose": "^4.4.4"
+    "mongoose": "^4.4.4",
+    "morgan": "^1.6.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
