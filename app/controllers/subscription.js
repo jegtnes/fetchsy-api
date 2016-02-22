@@ -4,8 +4,10 @@ var env     = require('../env');
 var Subscription = require('../models/subscription.js');
 
 var router = express.Router();
+var subscriptionController = {};
 
-router.get('/', function(req, res) {
+
+subscriptionController.getSubscriptions = function(req, res) {
   Subscription.find(function(err, subscriptions) {
     if (err) {
       res.send(err);
@@ -13,9 +15,9 @@ router.get('/', function(req, res) {
 
     res.json(subscriptions);
   });
-});
+};
 
-router.get('/:subscriptionId', function(req, res) {
+subscriptionController.getSubscription = function(req, res) {
   Subscription.findById(req.params.subscriptionId, function(err, subscription) {
     if (!subscription) {
       return res.status(404).send({
@@ -29,9 +31,9 @@ router.get('/:subscriptionId', function(req, res) {
 
     return res.json(subscription);
   });
-});
+};
 
-router.post('/', function(req, res) {
+subscriptionController.postSubscription = function(req, res) {
   var subscription = new Subscription();
   if (req.body.shopname != false && !req.body.frequency != false) {
     return res.status(400).json({message: 'Missing fields dawg'});
@@ -50,9 +52,9 @@ router.post('/', function(req, res) {
 
     return res.status(201).header('Location', resourceURI).end();
   });
-});
+};
 
-router.put('/:subscriptionId', function(req, res) {
+subscriptionController.putSubscription = function(req, res) {
   Subscription.findById(req.params.subscriptionId, function(err, subscription) {
     if (err) {
       return res.status(500).send(err);
@@ -73,9 +75,9 @@ router.put('/:subscriptionId', function(req, res) {
       return res.json(subscription);
     });
   });
-});
+};
 
-router.delete('/:subscriptionId', function(req, res) {
+subscriptionController.deleteSubscription = function(req, res) {
   Subscription.findByIdAndRemove(req.params.subscriptionId, function(err) {
     if (err) {
       return res.status(500).send(err);
@@ -83,6 +85,6 @@ router.delete('/:subscriptionId', function(req, res) {
 
     return res.status(204).end();
   });
-});
+};
 
-module.exports = router;
+module.exports = subscriptionController;
