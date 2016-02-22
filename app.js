@@ -4,7 +4,7 @@ var bodyParser =   require('body-parser');
 
 var conf =         require('./app/config');
 var env =          require('./app/env');
-var router =       require('./app/routes/index');
+var router =       require('./app/routes');
 
 var Subscription = require('./app/models/subscription');
 mongoose.connect('mongodb://localhost/fetchsy');

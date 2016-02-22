@@ -1,7 +1,7 @@
 var express = require('express');
 
-var env     = require('../../env');
-var Subscription = require('../../models/subscription.js');
+var env     = require('../env');
+var Subscription = require('../models/subscription.js');
 
 var router = express.Router();
 
