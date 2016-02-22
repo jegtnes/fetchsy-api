@@ -75,4 +75,14 @@ router.put('/:subscriptionId', function(req, res) {
   });
 });
 
+router.delete('/:subscriptionId', function(req, res) {
+  Subscription.findByIdAndRemove(req.params.subscriptionId, function(err) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    return res.status(204).end();
+  });
+});
+
 module.exports = router;
