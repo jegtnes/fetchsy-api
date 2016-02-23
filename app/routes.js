@@ -22,6 +22,9 @@ router.route('/users')
   .get(usersController.getUsers)
   .post(usersController.postUser);
 
+router.route('/users/:userId')
+  .get(usersController.getUser)
+
 // router.route('/users/:user')
 
 module.exports = router;

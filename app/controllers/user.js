@@ -16,6 +16,22 @@ userController.getUsers = function(req, res) {
   });
 }
 
+userController.getUser = function(req, res) {
+  User.findById(req.params.userId, function(err, user) {
+    if (!user) {
+      return res.status(404).send({
+        message: "Can't find the user."
+      });
+    }
+
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    return res.json(user);
+  });
+}
+
 userController.postUser = function(req, res) {
   var user = new User({
     email: req.body.email,
