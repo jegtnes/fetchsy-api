@@ -35,12 +35,13 @@ subscriptionController.getSubscription = function(req, res) {
 
 subscriptionController.postSubscription = function(req, res) {
   var subscription = new Subscription();
-  if (req.body.shopname != false && !req.body.frequency != false) {
+  if (!req.body.shopName || !req.body.frequency) {
     return res.status(400).json({message: 'Missing fields dawg'});
   }
 
   subscription.shopName = req.body.shopName;
   subscription.frequency = req.body.frequency;
+  subscription.userId = req.user._id; // comes from Passports req.user
   subscription.lastChecked = Date.now();
 
   subscription.save(function(err) {
@@ -55,7 +56,7 @@ subscriptionController.postSubscription = function(req, res) {
 };
 
 subscriptionController.putSubscription = function(req, res) {
-  Subscription.findById(req.params.subscriptionId, function(err, subscription) {
+  Subscription.find({_id: req.params.subscriptionId, userId: req.user._id}, function(err, subscription) {
     if (err) {
       return res.status(500).send(err);
     }
@@ -66,6 +67,7 @@ subscriptionController.putSubscription = function(req, res) {
 
     subscription.frequency = req.body.frequency || subscription.frequency;
     subscription.shopName = req.body.shopName || subscription.shopName;
+    subscription.userId = req.user._id; // comes from Passports req.user
 
     subscription.save(function(err) {
       if (err) {
@@ -78,7 +80,7 @@ subscriptionController.putSubscription = function(req, res) {
 };
 
 subscriptionController.deleteSubscription = function(req, res) {
-  Subscription.findByIdAndRemove(req.params.subscriptionId, function(err) {
+  Subscription.remove({_id: req.params.subscriptionId, userId: req.user._id}, function(err) {
     if (err) {
       return res.status(500).send(err);
     }
