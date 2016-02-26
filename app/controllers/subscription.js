@@ -41,7 +41,7 @@ subscriptionController.postSubscription = function(req, res) {
 
   subscription.shopName = req.body.shopName;
   subscription.frequency = req.body.frequency;
-  subscription.userId = req.user._id; // comes from Passports req.user
+  subscription.userId = req.body.userId;
   subscription.lastChecked = Date.now();
 
   subscription.save(function(err) {
@@ -56,7 +56,7 @@ subscriptionController.postSubscription = function(req, res) {
 };
 
 subscriptionController.putSubscription = function(req, res) {
-  Subscription.find({_id: req.params.subscriptionId, userId: req.user._id}, function(err, subscription) {
+  Subscription.find({_id: req.params.subscriptionId}, function(err, subscription) {
     if (err) {
       return res.status(500).send(err);
     }
@@ -67,7 +67,6 @@ subscriptionController.putSubscription = function(req, res) {
 
     subscription.frequency = req.body.frequency || subscription.frequency;
     subscription.shopName = req.body.shopName || subscription.shopName;
-    subscription.userId = req.user._id; // comes from Passports req.user
 
     subscription.save(function(err) {
       if (err) {
@@ -80,7 +79,7 @@ subscriptionController.putSubscription = function(req, res) {
 };
 
 subscriptionController.deleteSubscription = function(req, res) {
-  Subscription.remove({_id: req.params.subscriptionId, userId: req.user._id}, function(err) {
+  Subscription.remove({_id: req.params.subscriptionId}, function(err) {
     if (err) {
       return res.status(500).send(err);
     }
