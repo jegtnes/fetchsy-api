@@ -22,6 +22,11 @@ var conf = convict({
     doc: "The suffix URL fragment to access the API.",
     format: String,
     default: "/api/v1/"
+  },
+  apiKey: {
+    doc: "Admin  API key to access API",
+    format: String,
+    default: false
   }
 });
 
