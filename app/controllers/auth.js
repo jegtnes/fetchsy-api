@@ -7,10 +7,10 @@ var config = require('../config');
 passport.use(new Strategy(
   function(token, callback) {
     if (config.get('apiKey') !== token) {
-      return callback(true);
+      return callback(null, false);
     }
     else {
-      return callback(null, true)
+      return callback(null, true);
     }
   }
 ));
