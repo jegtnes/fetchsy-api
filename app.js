@@ -19,3 +19,5 @@ app.use(env.apiSuffix, router);
 
 app.listen(conf.get('port'));
 console.log('Listening on', + conf.get('port'));
+
+module.exports = app;
