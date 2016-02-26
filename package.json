@@ -8,9 +8,7 @@
     "body-parser": "^1.15.0",
     "convict": "^1.1.2",
     "express": "^4.13.4",
-    "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.4",
-    "morgan": "^1.6.1",
     "passport": "^0.3.2",
     "passport-http-bearer": "^1.0.1",
     "url-join": "0.0.1"
