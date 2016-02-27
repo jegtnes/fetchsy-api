@@ -18,19 +18,21 @@ describe('User routes', function() {
     it('should create a user', function(done) {
 
       var user = {
-        email: 'youwhat@m8.com@@@',
+        email: 'youwhat@m8.com',
         password: 'n3ckb34rd'
       }
 
       request(app)
         .post(apiSuffix)
-        .set('Authorization', 'Bearer ' + conf.get('apiKey'))
+        .set(authHeader)
         .type('form')
         .send(user)
         .end(function(err, res) {
-          console.log(res.body);
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(201);
+          expect(res.get('Location')).to.exist;
           done();
-        })
+        });
     });
   });
 });
