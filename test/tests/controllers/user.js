@@ -57,8 +57,6 @@ describe('User routes', function() {
     it('should show a single user', function(done) {
       var fixtureId = fixtures.User.user1._id;
 
-      console.log(apiSuffix + '/' + fixtureId);
-
       request(app)
         .get(apiSuffix + '/' + fixtureId)
         .set(authHeader)
