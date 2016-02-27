@@ -48,7 +48,7 @@ userController.postUser = function(req, res) {
       return res.status(500).send(err);
     }
 
-    var resourceURI = env.apiURL + '/users/' + user._id;
+    var resourceURI = env.apiURL + 'users/' + user._id;
 
     return res.status(201).header('Location', resourceURI).end();
   });
