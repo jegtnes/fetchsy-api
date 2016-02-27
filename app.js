@@ -7,7 +7,7 @@ var env =          require('./app/env');
 var router =       require('./app/routes');
 
 var Subscription = require('./app/models/subscription');
-mongoose.connect('mongodb://localhost/fetchsy');
+mongoose.connect(conf.get('dbUrl'));
 
 var app = express();
 

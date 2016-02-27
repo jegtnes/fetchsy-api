@@ -24,7 +24,12 @@ var conf = convict({
     default: "/api/v1/"
   },
   apiKey: {
-    doc: "Admin  API key to access API",
+    doc: "Admin API key to access API",
+    format: String,
+    default: false
+  },
+  dbUrl: {
+    doc: "Database URL",
     format: String,
     default: false
   }
