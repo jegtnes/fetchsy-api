@@ -35,4 +35,18 @@ describe('User routes', function() {
         });
     });
   });
+
+  describe('show users', function() {
+    it('should show users', function(done) {
+      request(app)
+        .get(apiSuffix)
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('array');
+          done();
+        });
+    })
+  });
 });
