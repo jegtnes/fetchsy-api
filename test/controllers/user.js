@@ -45,7 +45,8 @@ describe('User routes', function() {
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('array');
-          console.log(res.body);
+          expect(res.body.length).to.equal(1);
+          expect(res.body[0].email).to.equal('test1@test.com');
           done();
         });
     })
