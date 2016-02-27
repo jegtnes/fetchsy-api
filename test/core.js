@@ -6,6 +6,10 @@ var conf = require('../app/config');
 
 before(function(done) {
   mockgoose(mongoose);
+  done();
+});
+
+beforeEach(function(done) {
   fixtures.load({
     User: [
       {
@@ -21,10 +25,8 @@ before(function(done) {
   done();
 });
 
-after(function(done) {
+afterEach(function(done) {
   mockgoose.reset(function() {
-    mockgoose.reset();
-    mongoose.connection.close();
     done();
   });
 });

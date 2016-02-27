@@ -45,6 +45,7 @@ describe('User routes', function() {
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('array');
+          console.log(res.body);
           done();
         });
     })
