@@ -2,12 +2,12 @@ var expect = require('chai').expect;
 var request = require('supertest');
 var bodyParser = require('body-parser');
 
-var conf = require('../../app/config');
+var conf = require('../../../app/config');
 
 var apiSuffix = conf.get('apiSuffix') + "users";
 var authHeader = {'Authorization': 'Bearer ' + conf.get('apiKey')}
 
-var app = require('../../app');
+var app = require('../../../app');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -42,13 +42,22 @@ describe('User routes', function() {
         .get(apiSuffix)
         .set(authHeader)
         .end(function(err, res) {
+          console.log(res.body);
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('array');
-          expect(res.body.length).to.equal(1);
+          expect(res.body.length).to.equal(2);
           expect(res.body[0].email).to.equal('test1@test.com');
           done();
         });
-    })
+    });
   });
+
+  // describe('show single user', function() {
+  //   it('should show a single user', function(done) {
+  //     request(app)
+  //       .get(apiSuffix + '/')
+  //     done();
+  //   });
+  // });
 });

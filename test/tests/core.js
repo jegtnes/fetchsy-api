@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 var mockgoose = require('mockgoose');
 var fixtures = require('pow-mongoose-fixtures');
-
-var conf = require('../app/config');
+var conf = require('../../app/config');
 
 before(function(done) {
   mockgoose(mongoose);
@@ -10,18 +9,7 @@ before(function(done) {
 });
 
 beforeEach(function(done) {
-  fixtures.load({
-    User: [
-      {
-        email: 'test1@test.com',
-        password: 'testytest'
-      },
-      {
-        email: 'test2@test.com',
-        password: 'testytest'
-      }
-    ]
-  }, mongoose.connection);
+  fixtures.load('../fixtures/fixtures.js', mongoose.connection);
   done();
 });
 
