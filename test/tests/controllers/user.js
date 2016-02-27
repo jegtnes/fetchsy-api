@@ -3,6 +3,7 @@ var request = require('supertest');
 var bodyParser = require('body-parser');
 
 var conf = require('../../../app/config');
+var fixtures = require('../../fixtures/fixtures');
 
 var apiSuffix = conf.get('apiSuffix') + "users";
 var authHeader = {'Authorization': 'Bearer ' + conf.get('apiKey')}
@@ -42,7 +43,6 @@ describe('User routes', function() {
         .get(apiSuffix)
         .set(authHeader)
         .end(function(err, res) {
-          console.log(res.body);
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('array');
@@ -53,11 +53,22 @@ describe('User routes', function() {
     });
   });
 
-  // describe('show single user', function() {
-  //   it('should show a single user', function(done) {
-  //     request(app)
-  //       .get(apiSuffix + '/')
-  //     done();
-  //   });
-  // });
+  describe('show single user', function() {
+    it('should show a single user', function(done) {
+      var fixtureId = fixtures.User.user1._id;
+
+      console.log(apiSuffix + '/' + fixtureId);
+
+      request(app)
+        .get(apiSuffix + '/' + fixtureId)
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.email).to.be.ok;
+        })
+      done();
+    });
+  });
 });
