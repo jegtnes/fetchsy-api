@@ -1,23 +1,34 @@
 var expect = require('chai').expect;
 var request = require('supertest');
+var bodyParser = require('body-parser');
 
 var conf = require('../../app/config');
-conf.set('port', conf.get('port') + 1);
 
 var apiSuffix = conf.get('apiSuffix') + "users";
 var authHeader = {'Authorization': 'Bearer ' + conf.get('apiKey')}
 
 var app = require('../../app');
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 
 describe('User routes', function() {
   describe('signup', function() {
-    it('should list users', function(done) {
+    it('should create a user', function(done) {
+
+      var user = {
+        email: 'youwhat@m8.com@@@',
+        password: 'n3ckb34rd'
+      }
+
       request(app)
-        .get(apiSuffix)
-        .set(authHeader)
-        .expect(200)
+        .post(apiSuffix)
+        .set('Authorization', 'Bearer ' + conf.get('apiKey'))
+        .type('form')
+        .send(user)
         .end(function(err, res) {
-          expect(err).to.equal(null);
+          console.log(res.body);
           done();
         })
     });
