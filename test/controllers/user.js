@@ -1,15 +1,11 @@
 var expect = require('chai').expect;
 var request = require('supertest');
-var mongoose = require('mongoose');
-var mockgoose = require('mockgoose');
 
 var conf = require('../../app/config');
 conf.set('port', conf.get('port') + 1);
 
 var apiSuffix = conf.get('apiSuffix') + "users";
 var authHeader = {'Authorization': 'Bearer ' + conf.get('apiKey')}
-
-mockgoose(mongoose);
 
 var app = require('../../app');
 
