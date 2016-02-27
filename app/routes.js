@@ -21,7 +21,7 @@ router.route('/subscriptions/:subscriptionId')
 
 router.route('/users')
   .get(authController.isAuthenticated, usersController.getUsers)
-  .post(usersController.postUser);
+  .post(authController.isAuthenticated, usersController.postUser);
 
 router.route('/users/:userId')
   .get(usersController.getUser)
