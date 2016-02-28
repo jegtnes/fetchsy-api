@@ -97,4 +97,21 @@ describe('Subscription routes', function() {
         });
     });
   });
+
+  describe('delete subscription', function() {
+    it('should delete an existing subscription', function(done) {
+
+      var fixtureId = fixtures.Subscription.sub3._id;
+
+      request(app)
+        .delete(apiSuffix + '/' + fixtureId)
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(204);
+          expect(res.body).to.be.empty;
+          done();
+        });
+    });
+  });
 });
