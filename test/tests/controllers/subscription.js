@@ -6,7 +6,6 @@ var conf = require('../../../app/config');
 var fixtures = require('../../fixtures/fixtures');
 
 var apiSuffix = conf.get('apiSuffix') + "subscriptions";
-console.log(apiSuffix);
 var authHeader = {'Authorization': 'Bearer ' + conf.get('apiKey')}
 
 var app = require('../../../app');
