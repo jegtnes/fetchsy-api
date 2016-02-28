@@ -1,3 +1,7 @@
+// @TODO: Make sure userId belongs to real user
+// @TODO: Frequency validation
+// @TODO: Duplication check (userId & shopName)
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

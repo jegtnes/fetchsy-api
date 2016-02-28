@@ -1,3 +1,7 @@
+// @TODO: Return nicer duplicate error
+// @TODO: Email validationn
+// @TODO: Rudimentary password strength check
+
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
