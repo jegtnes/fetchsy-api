@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
 // @TODO: Tests for 404s. Tests for bad data
 
 describe('Subscription routes', function() {
-  describe('show', function() {
+  describe('show subscriptions', function() {
     it('should show all subscriptions', function(done) {
       request(app)
         .get(apiSuffix)
