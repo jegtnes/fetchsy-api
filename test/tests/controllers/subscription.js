@@ -72,4 +72,29 @@ describe('Subscription routes', function() {
         });
     });
   });
+
+  describe('update subscription', function() {
+    it('should update an existing subscription', function(done) {
+
+      var fixtureId = fixtures.Subscription.sub3._id;
+
+      var subscription = {
+        frequency: 120,
+        shopName: 'Artisanal Goat Herding Supplies'
+      };
+
+      request(app)
+        .put(apiSuffix + '/' + fixtureId)
+        .set(authHeader)
+        .type('form')
+        .send(subscription)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.frequency).to.equal(120);
+          expect(res.body.shopName).to.equal('Artisanal Goat Herding Supplies');
+          done();
+        });
+    });
+  });
 });
