@@ -26,6 +26,4 @@ router.route('/users')
 router.route('/users/:userId')
   .get(usersController.getUser)
 
-// router.route('/users/:user')
-
 module.exports = router;
