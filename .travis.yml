@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - node
+
+services:
+  - mongodb
+
+notifications:
+  email:
+    recipients:
+      - alex@jegtnes.co.uk

@@ -1,5 +1,5 @@
 var convict = require('convict');
-var fs = require('fs');
+var fileExists = require('file-exists');
 
 var conf = convict({
   env: {
@@ -27,20 +27,21 @@ var conf = convict({
   apiKey: {
     doc: "Admin API key to access API",
     format: String,
-    default: false
+    default: false,
+    env: "API_KEY"
   },
   dbUrl: {
     doc: "Database URL",
     format: String,
-    default: false
+    default: false,
+    env: "DB_URL"
   }
 });
 
 var env = conf.get('env');
-var confFile = '.' + env + '.config.json';
+var confFile = process.cwd() + '/.' + env + '.config.json';
 
-// file exists?
-if (fs.statSync(confFile).isFile()) {
+if (fileExists(confFile)) {
   conf.loadFile('.' + env + '.config.json');
 }
 
