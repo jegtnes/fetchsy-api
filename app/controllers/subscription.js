@@ -56,7 +56,7 @@ subscriptionController.postSubscription = function(req, res) {
 };
 
 subscriptionController.putSubscription = function(req, res) {
-  Subscription.find({_id: req.params.subscriptionId}, function(err, subscription) {
+  Subscription.findOne({_id: req.params.subscriptionId}, function(err, subscription) {
     if (err) {
       return res.status(500).send(err);
     }
