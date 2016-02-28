@@ -24,8 +24,8 @@ describe('Subscription routes', function() {
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('array');
-          // expect(res.body.length).to.equal(3);
-          // expect(res.body[0].email).to.equal('test1@test.com');
+          expect(res.body.length).to.equal(3);
+          expect(res.body[0].shopName).to.equal('UnicornFluff');
         });
     });
   });
