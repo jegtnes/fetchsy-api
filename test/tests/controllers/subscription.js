@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({
 
 describe('Subscription routes', function() {
   describe('show', function() {
-    it('should show all subscriptions', function() {
+    it('should show all subscriptions', function(done) {
       request(app)
         .get(apiSuffix)
         .set(authHeader)
@@ -26,6 +26,7 @@ describe('Subscription routes', function() {
           expect(res.body).to.be.an('array');
           expect(res.body.length).to.equal(3);
           expect(res.body[0].shopName).to.equal('UnicornFluff');
+          done();
         });
     });
   });
