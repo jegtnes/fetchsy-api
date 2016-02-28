@@ -48,4 +48,28 @@ describe('Subscription routes', function() {
         });
     });
   });
+
+  describe('create subscription', function() {
+    it('should create a subscription', function(done) {
+
+      var subscription = {
+        shopName: "Artisanal Artisans",
+        frequency: 30,
+        userId: "cantbebotheredgeneratingamongodbuserid"
+      };
+
+      request(app)
+        .post(apiSuffix)
+        .set(authHeader)
+        .type('form')
+        .send(subscription)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(201);
+          expect(res.get('Location')).to.exist;
+          expect(res.body).to.be.empty;
+          done();
+        });
+    });
+  });
 });
