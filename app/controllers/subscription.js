@@ -35,7 +35,7 @@ subscriptionController.getSubscription = function(req, res) {
 
 subscriptionController.postSubscription = function(req, res) {
   var subscription = new Subscription();
-  if (!req.body.shopName || !req.body.frequency) {
+  if (!req.body.shopName || !req.body.frequency || !req.body.userId) {
     return res.status(400).json({message: 'Missing fields dawg'});
   }
 
