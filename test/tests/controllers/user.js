@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+// @TODO: Tests for 404s. Tests for bad data
 
 describe('User routes', function() {
   describe('signup', function() {

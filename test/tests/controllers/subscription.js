@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+// @TODO: Tests for 404s. Tests for bad data
+
 describe('Subscription routes', function() {
   describe('show', function() {
     it('should show all subscriptions', function(done) {
