@@ -36,6 +36,25 @@ describe('User routes', function() {
           done();
         });
     });
+
+    it.only('should prevent creating a user with a duplicate email', function(done) {
+      var user = {
+        email: 'test1@test.com',
+        password: 'youwhat'
+      }
+
+      request(app)
+        .post(apiSuffix)
+        .set(authHeader)
+        .type('form')
+        .send(user)
+        .end(function(err, res) {
+          console.log(res.body);
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.message).to.exist;
+          done();
+        });
+    })
   });
 
   describe('show users', function() {
