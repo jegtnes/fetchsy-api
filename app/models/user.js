@@ -3,6 +3,7 @@
 // @TODO: Rudimentary password strength check
 
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 var bcrypt = require('bcrypt-nodejs');
 
 var UserSchema = new mongoose.Schema({
@@ -17,6 +18,9 @@ var UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.plugin(uniqueValidator, {
+  message: 'This email ({VALUE}) has already been registered. Please try another!'
+});
 
 UserSchema.pre('save', function(callback) {
   var user = this;
