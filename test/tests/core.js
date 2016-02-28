@@ -9,8 +9,9 @@ before(function(done) {
 });
 
 beforeEach(function(done) {
-  fixtures.load('../fixtures/fixtures.js', mongoose.connection);
-  done();
+  fixtures.load('../fixtures/fixtures.js', mongoose.connection, function() {
+    done();
+  });
 });
 
 afterEach(function(done) {
