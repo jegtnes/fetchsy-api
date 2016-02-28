@@ -6,9 +6,10 @@ var authController = require('./controllers/auth');
 
 var router = express.Router();
 
-router.get('/', function(req, res) {
-  res.json({message: "hello world"});
-})
+router.route('/')
+  .get(authController.isAuthenticated, function(req, res) {
+    res.json({message: "hello world"});
+  })
 
 router.route('/subscriptions')
   .get(authController.isAuthenticated, subscriptionsController.getSubscriptions)
