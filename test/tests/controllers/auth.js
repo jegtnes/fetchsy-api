@@ -12,12 +12,22 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-describe('authentication', function() {
+describe('authorisation', function() {
   it('should be unauthorised if using wrong credentials', function(done) {
     request(app)
       .get(apiSuffix)
       .end(function(err, res) {
         expect(res.statusCode).to.equal(401);
+        done();
+      });
+  });
+
+  it('should be authorised if using correct credentials', function(done) {
+    request(app)
+      .get(apiSuffix)
+      .set(authHeader)
+      .end(function(err, res) {
+        expect(res.statusCode).to.equal(200);
         done();
       });
   });
