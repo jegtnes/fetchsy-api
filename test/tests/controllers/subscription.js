@@ -32,4 +32,20 @@ describe('Subscription routes', function() {
         });
     });
   });
+
+  describe('show single subscription', function() {
+    it('should show a single subscription', function(done) {
+      var fixtureId = fixtures.Subscription.sub3._id;
+      request(app)
+        .get(apiSuffix + '/' + fixtureId)
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.shopName).to.equal('CoolKidzSkateboardz');
+          done();
+        });
+    });
+  });
 });
