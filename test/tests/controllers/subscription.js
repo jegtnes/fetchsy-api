@@ -1,0 +1,32 @@
+var expect = require('chai').expect;
+var request = require('supertest');
+var bodyParser = require('body-parser');
+
+var conf = require('../../../app/config');
+var fixtures = require('../../fixtures/fixtures');
+
+var apiSuffix = conf.get('apiSuffix') + "subscriptions";
+console.log(apiSuffix);
+var authHeader = {'Authorization': 'Bearer ' + conf.get('apiKey')}
+
+var app = require('../../../app');
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+describe('Subscription routes', function() {
+  describe('show', function() {
+    it('should show all subscriptions', function() {
+      request(app)
+        .get(apiSuffix)
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('array');
+          // expect(res.body.length).to.equal(3);
+          // expect(res.body[0].email).to.equal('test1@test.com');
+        });
+    });
+  });
+});
