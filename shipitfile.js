@@ -21,7 +21,7 @@ module.exports = function (shipit) {
   });
 
   shipit.blTask('dependencies', function() {
-    return shipit.remote('cd ' + shipit.releasePath + ' && npm install')
+    return shipit.remote('cd ' + shipit.releasePath + ' && npm install --production')
   });
 
   shipit.on('updated', function () {
