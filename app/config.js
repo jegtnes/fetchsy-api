@@ -1,4 +1,5 @@
 var convict = require('convict');
+var fs = require('fs');
 
 var conf = convict({
   env: {
@@ -36,7 +37,12 @@ var conf = convict({
 });
 
 var env = conf.get('env');
-conf.loadFile('.' + env + '.config.json');
+var confFile = '.' + env + '.config.json';
+
+// file exists?
+if (fs.statSync(confFile).isFile()) {
+  conf.loadFile('.' + env + '.config.json');
+}
 
 conf.validate({strict: true});
 
