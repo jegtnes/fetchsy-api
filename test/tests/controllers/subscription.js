@@ -1,4 +1,7 @@
+var chai = require('chai');
 var expect = require('chai').expect;
+chai.use(require('chai-things'));
+
 var request = require('supertest');
 var bodyParser = require('body-parser');
 
@@ -26,7 +29,8 @@ describe('Subscription routes', function() {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('array');
           expect(res.body.length).to.equal(3);
-          expect(res.body[0].shopName).to.equal('UnicornFluff');
+          expect(res.body).to.all.have.property('userId');
+          expect(res.body).to.all.have.property('shopName');
           done();
         });
     });
