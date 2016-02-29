@@ -75,6 +75,7 @@ describe('User routes', function() {
           expect(res.body.message).to.exist;
           expect(res.body.errors).to.be.an.array;
           expect(res.body.errors).to.not.be.empty;
+          done();
         });
     });
 
