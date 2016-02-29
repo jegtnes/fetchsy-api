@@ -1,5 +1,4 @@
-// @TODO: Return nicer duplicate error
-// @TODO: Email validationn
+// @TODO: Email validation
 // @TODO: Rudimentary password strength check
 
 var mongoose = require('mongoose');
