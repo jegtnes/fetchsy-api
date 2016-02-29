@@ -96,6 +96,26 @@ describe('User routes', function() {
           done();
         });
     });
+
+    it('should disallow a too-short password', function(done) {
+      var user = {
+        email: 'douche@insecure.com',
+        password: 'shkreli'
+      };
+
+      request(app)
+        .post(apiSuffix)
+        .set(authHeader)
+        .type('form')
+        .send(user)
+        .end(function(err, res) {
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.message).to.exist;
+          expect(res.body.errors).to.be.an.array;
+          expect(res.body.errors).to.not.be.empty;
+          done();
+        });
+    });
   });
 
   describe('show users', function() {
