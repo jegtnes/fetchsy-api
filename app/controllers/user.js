@@ -43,12 +43,17 @@ userController.postUser = function(req, res) {
     password: req.body.password
   });
 
+  // @TODO: Push this out into a model maybe?
   user.save(function(err) {
     if (err) {
       if (err.name && err.name === 'ValidationError') {
         var validationErrors = {message: "Validation errors", errors: []};
         if (err.errors.email) {
           validationErrors.errors.push({email: err.errors.email.message});
+        }
+
+        if (err.errors.password) {
+          validationErrors.errors.push({password: err.errors.password.message});
         }
 
         return res.status(422).send(validationErrors);
