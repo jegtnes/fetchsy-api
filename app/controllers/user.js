@@ -45,6 +45,14 @@ userController.postUser = function(req, res) {
 
   user.save(function(err) {
     if (err) {
+      if (err.name && err.name === 'ValidationError') {
+        var validationErrors = {message: "Validation errors", errors: []};
+        if (err.errors.email) {
+          validationErrors.errors.push({email: err.errors.email.message});
+        }
+
+        return res.status(422).send(validationErrors);
+      }
       return res.status(500).send(err);
     }
 

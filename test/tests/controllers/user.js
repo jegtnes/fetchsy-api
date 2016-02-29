@@ -1,4 +1,6 @@
+var chai = require('chai');
 var expect = require('chai').expect;
+chai.use(require('chai-things'));
 var request = require('supertest');
 var bodyParser = require('body-parser');
 
@@ -36,6 +38,64 @@ describe('User routes', function() {
           done();
         });
     });
+
+    it('should prevent creating a user with a duplicate email', function(done) {
+      var user = {
+        email: 'test1@test.com',
+        password: 'youwhat'
+      }
+
+      request(app)
+        .post(apiSuffix)
+        .set(authHeader)
+        .type('form')
+        .send(user)
+        .end(function(err, res) {
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.message).to.exist;
+          expect(res.body.errors).to.be.an.array;
+          expect(res.body.errors).to.not.be.empty;
+          done();
+      });
+    });
+
+    it('should prevent an invalid email from being registered', function(done) {
+      var user = {
+        email: 'test1@2',
+        password: 'youwhat'
+      };
+
+      request(app)
+        .post(apiSuffix)
+        .set(authHeader)
+        .type('form')
+        .send(user)
+        .end(function(err, res) {
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.message).to.exist;
+          expect(res.body.errors).to.be.an.array;
+          expect(res.body.errors).to.not.be.empty;
+          done();
+        });
+    });
+
+    it('should allow an obscure, but valid email, to be registered', function(done) {
+      var user = {
+        email: '!#$%&`*+/=?^`{|}~@abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghikl.com',
+        password: 'youwhat'
+      };
+
+      request(app)
+        .post(apiSuffix)
+        .set(authHeader)
+        .type('form')
+        .send(user)
+        .end(function(err, res) {
+          expect(res.statusCode).to.equal(201);
+          expect(res.get('Location')).to.exist;
+          done();
+        });
+    });
   });
 
   describe('show users', function() {
@@ -48,7 +108,7 @@ describe('User routes', function() {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('array');
           expect(res.body.length).to.equal(2);
-          expect(res.body[0].email).to.equal('test1@test.com');
+          expect(res.body).to.all.have.property('email');
           done();
         });
     });

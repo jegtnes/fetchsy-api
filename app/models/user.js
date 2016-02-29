@@ -1,15 +1,21 @@
-// @TODO: Return nicer duplicate error
-// @TODO: Email validationn
 // @TODO: Rudimentary password strength check
 
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
+var validator = require('validator');
 var bcrypt = require('bcrypt-nodejs');
 
 var UserSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
-    required: true
+    required: true,
+    validate: {
+      validator: function(email) {
+        return validator.isEmail(email)
+      },
+      message: "This email address({VALUE}) is invalid. Please correct it and try again!"
+    }
   },
   password: {
     type: String,
@@ -17,6 +23,9 @@ var UserSchema = new mongoose.Schema({
   },
 });
 
+UserSchema.plugin(uniqueValidator, {
+  message: 'This email ({VALUE}) has already been registered. Please try another!'
+});
 
 UserSchema.pre('save', function(callback) {
   var user = this;
