@@ -42,7 +42,7 @@ describe('User routes', function() {
     it('should prevent creating a user with a duplicate email', function(done) {
       var user = {
         email: 'test1@test.com',
-        password: 'youwhat'
+        password: 'youwhatm8'
       }
 
       request(app)
@@ -62,7 +62,7 @@ describe('User routes', function() {
     it('should prevent an invalid email from being registered', function(done) {
       var user = {
         email: 'test1@2',
-        password: 'youwhat'
+        password: 'youwhatm8'
       };
 
       request(app)
@@ -82,7 +82,7 @@ describe('User routes', function() {
     it('should allow an obscure, but valid email, to be registered', function(done) {
       var user = {
         email: '!#$%&`*+/=?^`{|}~@abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghikl.com',
-        password: 'youwhat'
+        password: 'youwhatm8'
       };
 
       request(app)
