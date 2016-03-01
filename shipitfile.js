@@ -20,6 +20,10 @@ module.exports = function (shipit) {
     }
   });
 
+  shipit.on('init', function() {
+    return shipit.local('./node_modules/snyk/cli/commands/monitor');
+  });
+
   shipit.blTask('dependencies', function() {
     return shipit.remote('cd ' + shipit.releasePath + ' && npm install --production')
   });
