@@ -13,10 +13,11 @@
     "mongoose-unique-validator": "^1.0.2",
     "passport": "^0.3.2",
     "passport-http-bearer": "^1.0.1",
+    "snyk": "^1.11.1",
     "url-join": "0.0.1"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha test/tests --recursive"
+    "test": "snyk test && NODE_ENV=test mocha test/tests --recursive"
   },
   "repository": {
     "type": "git",

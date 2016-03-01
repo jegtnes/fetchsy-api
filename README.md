@@ -1,5 +1,5 @@
 # fetchsy-api
-[![Build Status](https://travis-ci.org/jegtnes/fetchsy-api.svg?branch=master)](https://travis-ci.org/jegtnes/fetchsy-api)
+[![Build Status](https://travis-ci.org/jegtnes/fetchsy-api.svg?branch=master)](https://travis-ci.org/jegtnes/fetchsy-api) [![Known Vulnerabilities](https://snyk.io/test/npm/name/badge.svg)](https://snyk.io/test/npm/name)
 
 ## Setup:
 - Clone down repository
