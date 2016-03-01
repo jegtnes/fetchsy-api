@@ -42,7 +42,7 @@ describe('User routes', function() {
     it('should prevent creating a user with a duplicate email', function(done) {
       var user = {
         email: 'test1@test.com',
-        password: 'youwhat'
+        password: 'youwhatm8'
       }
 
       request(app)
@@ -62,7 +62,7 @@ describe('User routes', function() {
     it('should prevent an invalid email from being registered', function(done) {
       var user = {
         email: 'test1@2',
-        password: 'youwhat'
+        password: 'youwhatm8'
       };
 
       request(app)
@@ -82,7 +82,7 @@ describe('User routes', function() {
     it('should allow an obscure, but valid email, to be registered', function(done) {
       var user = {
         email: '!#$%&`*+/=?^`{|}~@abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghikl.com',
-        password: 'youwhat'
+        password: 'youwhatm8'
       };
 
       request(app)
@@ -93,6 +93,26 @@ describe('User routes', function() {
         .end(function(err, res) {
           expect(res.statusCode).to.equal(201);
           expect(res.get('Location')).to.exist;
+          done();
+        });
+    });
+
+    it('should disallow a too-short password', function(done) {
+      var user = {
+        email: 'douche@insecure.com',
+        password: 'shkreli'
+      };
+
+      request(app)
+        .post(apiSuffix)
+        .set(authHeader)
+        .type('form')
+        .send(user)
+        .end(function(err, res) {
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.message).to.exist;
+          expect(res.body.errors).to.be.an.array;
+          expect(res.body.errors).to.not.be.empty;
           done();
         });
     });
