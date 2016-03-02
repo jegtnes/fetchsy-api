@@ -75,7 +75,7 @@ describe('Subscription routes', function() {
         });
     });
 
-    it.only('should not create a duplicate subscription', function(done) {
+    it('should not create a duplicate subscription', function(done) {
       var subscription = {};
       var duplicateFixture = fixtures.Subscription.sub1;
 
@@ -89,7 +89,6 @@ describe('Subscription routes', function() {
         .type('form')
         .send(subscription)
         .end(function(err, res) {
-          console.log(res.body);
           expect(res.statusCode).to.equal(422);
           expect(res.body.message).to.exist;
           done();
