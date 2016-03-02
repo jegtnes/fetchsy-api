@@ -74,6 +74,28 @@ describe('Subscription routes', function() {
           done();
         });
     });
+
+    it.only('should not create a duplicate subscription', function(done) {
+      var subscription = {};
+      var duplicateFixture = fixtures.Subscription.sub1;
+
+      subscription.shopName = duplicateFixture.shopName;
+      subscription.frequency = duplicateFixture.frequency;
+      subscription.userId = duplicateFixture.userId;
+
+      request(app)
+        .post(apiSuffix)
+        .set(authHeader)
+        .type('form')
+        .send(subscription)
+        .end(function(err, res) {
+          console.log(res);
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.message).to.exist;
+          expect(res.body.errors).to.be.an.array;
+          expect(res.body.errors).to.not.be.empty;
+        })
+    });
   });
 
   describe('update subscription', function() {
