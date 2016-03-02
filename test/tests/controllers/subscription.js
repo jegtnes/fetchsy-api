@@ -89,11 +89,10 @@ describe('Subscription routes', function() {
         .type('form')
         .send(subscription)
         .end(function(err, res) {
-          console.log(res);
+          console.log(res.body);
           expect(res.statusCode).to.equal(422);
           expect(res.body.message).to.exist;
-          expect(res.body.errors).to.be.an.array;
-          expect(res.body.errors).to.not.be.empty;
+          done();
         })
     });
   });
