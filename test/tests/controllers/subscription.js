@@ -54,11 +54,10 @@ describe('Subscription routes', function() {
 
   describe('create subscription', function() {
     it('should create a subscription', function(done) {
-
       var subscription = {
-        shopName: "Artisanal Artisans",
+        shopName: "GertGerts",
         frequency: 30,
-        userId: "cantbebotheredgeneratingamongodbuserid"
+        userId: 'temp'
       };
 
       request(app)
@@ -74,6 +73,45 @@ describe('Subscription routes', function() {
           done();
         });
     });
+
+    it('should not create a duplicate subscription', function(done) {
+      var subscription = {};
+      var duplicateFixture = fixtures.Subscription.sub1;
+
+      subscription.shopName = duplicateFixture.shopName;
+      subscription.frequency = duplicateFixture.frequency;
+      subscription.userId = duplicateFixture.userId;
+
+      request(app)
+        .post(apiSuffix)
+        .set(authHeader)
+        .type('form')
+        .send(subscription)
+        .end(function(err, res) {
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.message).to.exist;
+          done();
+        })
+    });
+
+    // it('should not create a subscription if the userId doesn\'t exist', function(done) {
+    //   var subscription = {
+    //     shopName: "Artisanal Artisans",
+    //     frequency: 30,
+    //     userId: "cantbebotheredgeneratingamongodbuserid"
+    //   };
+    //
+    //   request(app)
+    //     .post(apiSuffix)
+    //     .set(authHeader)
+    //     .type('form')
+    //     .send(subscription)
+    //     .end(function(err, res) {
+    //       expect(res.statusCode).to.equal(422);
+    //       expect(res.body.message).to.exist;
+    //       done();
+    //     })
+    // });
   });
 
   describe('update subscription', function() {

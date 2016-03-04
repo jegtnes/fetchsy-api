@@ -1,13 +1,16 @@
 // @TODO: Make sure userId belongs to real user
 // @TODO: Frequency validation
-// @TODO: Duplication check (userId & shopName)
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-module.exports = mongoose.model('Subscription', new Schema({
+var subscriptionSchema = new Schema({
   shopName: String,
   frequency: Number,
   lastChecked: { type: Date },
   userId: String
-}));
+});
+
+subscriptionSchema.index({ shopName: true, userId: true }, { unique: true });
+
+module.exports = mongoose.model('Subscription', subscriptionSchema);

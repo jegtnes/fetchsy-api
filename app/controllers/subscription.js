@@ -46,6 +46,13 @@ subscriptionController.postSubscription = function(req, res) {
 
   subscription.save(function(err) {
     if (err) {
+      // @TODO: Refactor this duplication into error handler helper w/ User.save
+      if (err.name && err.name === 'ValidationError') {
+        return res.status(422).send({
+          message: "Duplicate shop subscription for this user"
+        });
+      }
+
       return res.status(500).send(err);
     }
 
