@@ -28,9 +28,7 @@ describe('Subscription routes', function() {
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('array');
-          expect(res.body.length).to.equal(3);
-          expect(res.body).to.all.have.property('userId');
-          expect(res.body).to.all.have.property('shopName');
+          expect(res.body.subscriptions).to.all.have.property('shopName');
           done();
         });
     });
@@ -38,7 +36,7 @@ describe('Subscription routes', function() {
 
   describe('show single subscription', function() {
     it('should show a single subscription', function(done) {
-      var fixtureId = fixtures.Subscription.sub3._id;
+      var fixtureId = fixtures.Subscription.sub3.shopName;
       request(app)
         .get(apiSuffix + '/' + fixtureId)
         .set(authHeader)
@@ -46,7 +44,11 @@ describe('Subscription routes', function() {
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.shopName).to.equal('CoolKidzSkateboardz');
+          expect(res.body.shopName).to.exist;
+          expect(res.body.subscriptions.length).to.equal(2);
+          expect(res.body.subscriptions).to.all.have.property('userId');
+          expect(res.body.subscriptions).to.all.have.property('frequency');
+          expect(res.body.subscriptions).to.all.have.property('lastChecked');
           done();
         });
     });
@@ -54,14 +56,15 @@ describe('Subscription routes', function() {
 
   describe('create subscription', function() {
     it('should create a subscription', function(done) {
+      var shopName = fixtures.Subscription.sub1.shopName;
       var subscription = {
-        shopName: "GertGerts",
+        shopName: shopName,
         frequency: 30,
         userId: 'temp'
       };
 
       request(app)
-        .post(apiSuffix)
+        .post(apiSuffix + '/' + shopName)
         .set(authHeader)
         .type('form')
         .send(subscription)
@@ -83,7 +86,7 @@ describe('Subscription routes', function() {
       subscription.userId = duplicateFixture.userId;
 
       request(app)
-        .post(apiSuffix)
+        .post(apiSuffix + '/' + subscription.shopName)
         .set(authHeader)
         .type('form')
         .send(subscription)
@@ -117,15 +120,16 @@ describe('Subscription routes', function() {
   describe('update subscription', function() {
     it('should update an existing subscription', function(done) {
 
-      var fixtureId = fixtures.Subscription.sub3._id;
+      var fixture = fixtures.Subscription.sub3;
+      var shopName = fixture.shopName;
+      var userId = fixture.subscribers[0].userId;
 
       var subscription = {
-        frequency: 120,
-        shopName: 'Artisanal Goat Herding Supplies'
+        frequency: 120
       };
 
       request(app)
-        .put(apiSuffix + '/' + fixtureId)
+        .put(apiSuffix + '/' + shopName + '/' + userId)
         .set(authHeader)
         .type('form')
         .send(subscription)
@@ -133,7 +137,6 @@ describe('Subscription routes', function() {
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body.frequency).to.equal(120);
-          expect(res.body.shopName).to.equal('Artisanal Goat Herding Supplies');
           done();
         });
     });
@@ -142,10 +145,11 @@ describe('Subscription routes', function() {
   describe('delete subscription', function() {
     it('should delete an existing subscription', function(done) {
 
-      var fixtureId = fixtures.Subscription.sub3._id;
+      var shopName = fixtures.Subscription.sub3._id;
+      var userId = fixtures.Subscription.sub3._id;
 
       request(app)
-        .delete(apiSuffix + '/' + fixtureId)
+        .delete(apiSuffix + '/' + shopName + '/' + userId)
         .set(authHeader)
         .end(function(err, res) {
           expect(err).to.equal(null);
