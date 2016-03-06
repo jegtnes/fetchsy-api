@@ -17,24 +17,41 @@ var User = {
 var Subscription = {
   sub1: {
     _id: new mongoose.Types.ObjectId,
-    lastChecked: Date.now(),
-    userId: User.user1._id,
-    frequency: 15,
-    shopName: "UnicornFluff"
+    shopName: "UnicornFluff",
+    subscriptions: [
+      {
+        lastChecked: Date.now(),
+        userId: User.user1._id,
+        frequency: 15
+      },
+      {
+        lastChecked: Date.now(),
+        userId: User.user2._id,
+        frequency: 60
+      },
+    ]
   },
   sub2: {
     _id: new mongoose.Types.ObjectId,
-    lastChecked: Date.now(),
-    userId: User.user1._id,
-    frequency: 60,
-    shopName: "NostalgiaInc"
+    shopName: "NostalgiaInc",
+    subscriptions: [
+      {
+        lastChecked: Date.now(),
+        userId: User.user1._id,
+        frequency: 15
+      }
+    ]
   },
   sub3: {
     _id: new mongoose.Types.ObjectId,
-    lastChecked: Date.now(),
-    userId: User.user2._id,
-    frequency: 1,
-    shopName: "CoolKidzSkateboardz"
+    shopName: "CoolKidzSkateboardz",
+    subscriptions: [
+      {
+        lastChecked: Date.now(),
+        userId: User.user2._id,
+        frequency: 60
+      },
+    ]
   },
 }
 
