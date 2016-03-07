@@ -10,7 +10,12 @@ var User = {
   user2: {
     _id: new mongoose.Types.ObjectId,
     email: 'test2@test.com',
-    password: 'testytest'
+    password: 'testytest?'
+  },
+  user3: {
+    _id: new mongoose.Types.ObjectId,
+    email: 'test3@test.com',
+    password: 'testytest!'
   }
 };
 
@@ -50,6 +55,27 @@ var Subscription = {
         lastChecked: Date.now(),
         userId: User.user2._id,
         frequency: 60
+      },
+    ]
+  },
+  sub4: {
+    _id: new mongoose.Types.ObjectId,
+    shopName: "ShinyFloofs",
+    subscriptions: [
+      {
+        lastChecked: Date.now(),
+        userId: User.user1._id,
+        frequency: 60
+      },
+      {
+        lastChecked: Date.now(),
+        userId: User.user2._id,
+        frequency: 15
+      },
+      {
+        lastChecked: Date.now(),
+        userId: User.user3._id,
+        frequency: 120
       },
     ]
   },
