@@ -11,13 +11,16 @@ router.route('/')
     res.json({message: "hello world"});
   })
 
-router.route('/subscriptions')
-  .get(authController.isAuthenticated, subscriptionsController.getSubscriptions)
-  .post(authController.isAuthenticated, subscriptionsController.postSubscription);
+router.route('/shops')
+  .get(authController.isAuthenticated, subscriptionsController.getAllSubscriptions)
 
-router.route('/subscriptions/:subscriptionId')
-  .get(authController.isAuthenticated, subscriptionsController.getSubscription)
-  .put(authController.isAuthenticated, subscriptionsController.putSubscription)
+router.route('/shops/:shopName')
+  .get(authController.isAuthenticated, subscriptionsController.getSubscriptions)
+
+router.route('/shops/:shopName/:userId')
+  .get(authController.isAuthenticated, subscriptionsController.getSingleSubscription)
+  .put(authController.isAuthenticated, subscriptionsController.updateSubscription)
+  .post(authController.isAuthenticated, subscriptionsController.postSubscription)
   .delete(authController.isAuthenticated, subscriptionsController.deleteSubscription);
 
 router.route('/users')
