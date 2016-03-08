@@ -91,19 +91,28 @@ shopController.updateSubscription = function(req, res) {
     'subscriptions.userId': req.params.userId,
   }, {
     'subscriptions.$.frequency': parseInt(req.body.frequency, 10)
-  }, { new: true },
+  }, {
+    new: true,
+    // select defines the things we want to return and nothing else
+    select: {
+      shopName: req.params.shopName,
+      subscriptions: {
+        $elemMatch: {
+          userId: req.params.userId
+        }
+      }
+    }
+  },
   function(err, subscriptionResponse) {
     if (err) {
       return res.status(500).send(err);
     }
 
-    var subscription = {
-      _id: subscriptionResponse._id,
+    // format the things we get back from select slightly differently
+    return res.json({
       shopName: subscriptionResponse.shopName,
       subscription: subscriptionResponse.subscriptions[0]
-    };
-
-    return res.json(subscription);
+    });
 
   });
 };
