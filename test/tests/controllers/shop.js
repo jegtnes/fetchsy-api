@@ -77,86 +77,86 @@ describe('Shop', function() {
         });
     });
   });
-  //
-  // it('should not create a duplicate subscription', function(done) {
-  //   var subscription = {};
-  //   var duplicateFixture = fixtures.Subscription.sub1;
-  //
-  //   subscription.shopName = duplicateFixture.shopName;
-  //   subscription.frequency = duplicateFixture.frequency;
-  //   subscription.userId = duplicateFixture.userId;
-  //
-  //   request(app)
-  //     .post(apiSuffix + '/' + subscription.shopName)
-  //     .set(authHeader)
-  //     .type('form')
-  //     .send(subscription)
-  //     .end(function(err, res) {
-  //       expect(res.statusCode).to.equal(422);
-  //       expect(res.body.message).to.exist;
-  //       done();
-  //     })
-  // });
 
-  // it('should not create a subscription if the userId doesn\'t exist', function(done) {
-  //   var subscription = {
-  //     shopName: "Artisanal Artisans",
-  //     frequency: 30,
-  //     userId: "cantbebotheredgeneratingamongodbuserid"
-  //   };
-  //
-  //   request(app)
-  //     .post(apiSuffix)
-  //     .set(authHeader)
-  //     .type('form')
-  //     .send(subscription)
-  //     .end(function(err, res) {
-  //       expect(res.statusCode).to.equal(422);
-  //       expect(res.body.message).to.exist;
-  //       done();
-  //     })
-  // });
+  it('should not create a duplicate subscription', function(done) {
+    var subscription = {};
+    var duplicateFixture = fixtures.Subscription.sub1;
 
-  // describe('update subscription', function() {
-  //   it('should update an existing subscription', function(done) {
-  //
-  //     var fixture = fixtures.Subscription.sub3;
-  //     var shopName = fixture.shopName;
-  //     var userId = fixture.subscribers[0].userId;
-  //
-  //     var subscription = {
-  //       frequency: 120
-  //     };
-  //
-  //     request(app)
-  //       .put(apiSuffix + '/' + shopName + '/' + userId)
-  //       .set(authHeader)
-  //       .type('form')
-  //       .send(subscription)
-  //       .end(function(err, res) {
-  //         expect(err).to.equal(null);
-  //         expect(res.statusCode).to.equal(200);
-  //         expect(res.body.frequency).to.equal(120);
-  //         done();
-  //       });
-  //   });
-  // });
-  //
-  // describe('delete subscription', function() {
-  //   it('should delete an existing subscription', function(done) {
-  //
-  //     var shopName = fixtures.Subscription.sub3._id;
-  //     var userId = fixtures.Subscription.sub3._id;
-  //
-  //     request(app)
-  //       .delete(apiSuffix + '/' + shopName + '/' + userId)
-  //       .set(authHeader)
-  //       .end(function(err, res) {
-  //         expect(err).to.equal(null);
-  //         expect(res.statusCode).to.equal(204);
-  //         expect(res.body).to.be.empty;
-  //         done();
-  //       });
-  //   });
-  // });
+    subscription.shopName = duplicateFixture.shopName;
+    subscription.frequency = duplicateFixture.frequency;
+    subscription.userId = duplicateFixture.userId;
+
+    request(app)
+      .post(apiSuffix + '/' + subscription.shopName)
+      .set(authHeader)
+      .type('form')
+      .send(subscription)
+      .end(function(err, res) {
+        expect(res.statusCode).to.equal(422);
+        expect(res.body.message).to.exist;
+        done();
+      })
+  });
+
+  it('should not create a subscription if the userId doesn\'t exist', function(done) {
+    var subscription = {
+      shopName: "Artisanal Artisans",
+      frequency: 30,
+      userId: "cantbebotheredgeneratingamongodbuserid"
+    };
+
+    request(app)
+      .post(apiSuffix)
+      .set(authHeader)
+      .type('form')
+      .send(subscription)
+      .end(function(err, res) {
+        expect(res.statusCode).to.equal(422);
+        expect(res.body.message).to.exist;
+        done();
+      })
+  });
+
+  describe('update subscription', function() {
+    it('should update an existing subscription', function(done) {
+
+      var fixture = fixtures.Subscription.sub3;
+      var shopName = fixture.shopName;
+      var userId = fixture.subscribers[0].userId;
+
+      var subscription = {
+        frequency: 120
+      };
+
+      request(app)
+        .put(apiSuffix + '/' + shopName + '/' + userId)
+        .set(authHeader)
+        .type('form')
+        .send(subscription)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.frequency).to.equal(120);
+          done();
+        });
+    });
+  });
+
+  describe('delete subscription', function() {
+    it('should delete an existing subscription', function(done) {
+
+      var shopName = fixtures.Subscription.sub3._id;
+      var userId = fixtures.Subscription.sub3._id;
+
+      request(app)
+        .delete(apiSuffix + '/' + shopName + '/' + userId)
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(204);
+          expect(res.body).to.be.empty;
+          done();
+        });
+    });
+  });
 });
