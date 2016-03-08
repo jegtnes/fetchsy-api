@@ -80,5 +80,34 @@ shopController.getSubscription = function(req, res) {
   });
 };
 
+shopController.updateSubscription = function(req, res) {
+
+  if (req.body.frequency === false) {
+    return res.status(400).json({message: 'Missing fields, dawg'});
+  }
+
+  Shop.findOneAndUpdate({
+    shopName: req.params.shopName,
+    'subscriptions.userId': req.params.userId,
+  }, {
+    'subscriptions.$.frequency': parseInt(req.body.frequency, 10)
+  }, { new: true },
+  function(err, subscriptionResponse) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    var subscription = {
+      _id: subscriptionResponse._id,
+      shopName: subscriptionResponse.shopName,
+      subscription: subscriptionResponse.subscriptions[0]
+    };
+
+    return res.json(subscription);
+
+  });
+};
+
+
 
 module.exports = shopController;
