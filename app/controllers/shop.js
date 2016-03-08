@@ -55,4 +55,30 @@ shopController.postSubscription = function(req, res) {
   });
 };
 
+shopController.getSubscription = function(req, res) {
+  Shop.findOne({
+    shopName: req.params.shopName,
+    'subscriptions.userId': req.params.userId,
+  }, {
+    'subscriptions.$': 1
+  }, function(err, subscriptionResponse) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    if (!subscriptionResponse) {
+      return res.status(404).send({message: "Can't find a subscription to this shop under this username."})
+    }
+
+    var subscription = {
+      _id: subscriptionResponse.id,
+      shopName: req.params.shopName,
+      subscription: subscriptionResponse.subscriptions[0]
+    };
+
+    return res.json(subscription);
+  });
+};
+
+
 module.exports = shopController;

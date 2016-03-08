@@ -18,10 +18,10 @@ router.route('/shops')
 router.route('/shops/:shopName')
   .get(authController.isAuthenticated, shopController.getShop)
   .post(authController.isAuthenticated, shopController.postSubscription)
-//
-// router.route('/shops/:shopName/:userId')
-//   .get(authController.isAuthenticated, subscriptionsController.getSingleSubscription)
-//   .put(authController.isAuthenticated, subscriptionsController.updateSubscription)
+
+router.route('/shops/:shopName/:userId')
+  .get(authController.isAuthenticated, shopController.getSubscription)
+// .put(authController.isAuthenticated, shopController.updateSubscription)
 //   .delete(authController.isAuthenticated, subscriptionsController.deleteSubscription);
 //
 router.route('/users')
