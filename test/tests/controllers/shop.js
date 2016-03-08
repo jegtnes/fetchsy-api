@@ -140,7 +140,7 @@ describe('Shop', function() {
   });
 
   describe('update subscription', function() {
-    it.only('should update an existing subscription', function(done) {
+    it('should update an existing subscription', function(done) {
 
       var updateFixture = fixtures.Subscription.sub1;
 
