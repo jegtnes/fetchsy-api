@@ -140,25 +140,21 @@ describe('Shop', function() {
   });
 
   describe('update subscription', function() {
-    it('should update an existing subscription', function(done) {
+    it.only('should update an existing subscription', function(done) {
 
-      var fixture = fixtures.Subscription.sub3;
-      var shopName = fixture.shopName;
-      var userId = fixture.subscribers[0].userId;
-
-      var subscription = {
-        frequency: 120
-      };
+      var updateFixture = fixtures.Subscription.sub1;
 
       request(app)
-        .put(apiSuffix + '/' + shopName + '/' + userId)
+        .put(apiSuffix + '/' + updateFixture.shopName + '/' + updateFixture.subscriptions[0].userId)
         .set(authHeader)
         .type('form')
-        .send(subscription)
+        .send({frequency: 120})
         .end(function(err, res) {
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
-          expect(res.body.frequency).to.equal(120);
+          expect(res.body.shopName).to.equal(updateFixture.shopName);
+          expect(res.body.subscription.frequency).to.equal(120);
+          expect(res.body.subscription.userId).to.equal(updateFixture.subscriptions[0].userId);
           done();
         });
     });

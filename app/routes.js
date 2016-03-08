@@ -21,7 +21,7 @@ router.route('/shops/:shopName')
 
 router.route('/shops/:shopName/:userId')
   .get(authController.isAuthenticated, shopController.getSubscription)
-// .put(authController.isAuthenticated, shopController.updateSubscription)
+  .put(authController.isAuthenticated, shopController.updateSubscription)
 //   .delete(authController.isAuthenticated, subscriptionsController.deleteSubscription);
 //
 router.route('/users')
