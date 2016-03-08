@@ -24,11 +24,11 @@ router.route('/shops/:shopName')
 //   .put(authController.isAuthenticated, subscriptionsController.updateSubscription)
 //   .delete(authController.isAuthenticated, subscriptionsController.deleteSubscription);
 //
-// router.route('/users')
-//   .get(authController.isAuthenticated, usersController.getUsers)
-//   .post(authController.isAuthenticated, usersController.postUser);
-//
-// router.route('/users/:userId')
-//   .get(usersController.getUser)
+router.route('/users')
+  .get(authController.isAuthenticated, usersController.getUsers)
+  .post(authController.isAuthenticated, usersController.postUser);
+
+router.route('/users/:userId')
+  .get(usersController.getUser)
 
 module.exports = router;
