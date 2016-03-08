@@ -56,7 +56,7 @@ describe('Shop', function() {
   });
 
   describe('show single subscription', function() {
-    it.only('should show a single subscription', function(done) {
+    it('should show a single subscription', function(done) {
       var shopName = fixtures.Subscription.sub4.shopName;
       var userId = fixtures.Subscription.sub4.subscriptions[0].userId;
 
