@@ -3,17 +3,17 @@ var id = new mongoose.Types.ObjectId;
 
 var User = {
   user1: {
-    _id: new mongoose.Types.ObjectId,
+    _id: '56dea33788d072b46d511d5b',
     email: 'test1@test.com',
     password: 'testytest'
   },
   user2: {
-    _id: new mongoose.Types.ObjectId,
+    _id: '507f191e810c19729de860ea',
     email: 'test2@test.com',
     password: 'testytest?'
   },
   user3: {
-    _id: new mongoose.Types.ObjectId,
+    _id: '507f1f77bcf86cd799439011',
     email: 'test3@test.com',
     password: 'testytest!'
   }

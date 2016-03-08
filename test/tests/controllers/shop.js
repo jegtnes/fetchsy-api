@@ -55,6 +55,28 @@ describe('Shop', function() {
     });
   });
 
+  describe('show single subscription', function() {
+    it.only('should show a single subscription', function(done) {
+      var shopName = fixtures.Subscription.sub4.shopName;
+      var userId = fixtures.Subscription.sub4.subscriptions[0].userId;
+
+      request(app)
+        .get(apiSuffix + '/' + shopName + '/' + userId)
+        .set(authHeader)
+        .end(function(err, res) {
+          console.log(res.body);
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.shopName).to.exist;
+          expect(res.body.subscription.userId).to.equal(userId)
+          expect(res.body.subscription.frequency).to.exist;
+          expect(res.body.subscription.lastChecked).to.exist;
+          done();
+        });
+    });
+  });
+
   describe('create subscription to shop', function() {
     it('should create a subscription', function(done) {
       var shopName = fixtures.Subscription.sub1.shopName;
