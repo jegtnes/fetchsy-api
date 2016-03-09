@@ -163,8 +163,8 @@ describe('Shop', function() {
   describe('delete subscription', function() {
     it('should delete an existing subscription', function(done) {
 
-      var shopName = fixtures.Subscription.sub3._id;
-      var userId = fixtures.Subscription.sub3._id;
+      var shopName = fixtures.Subscription.sub3.shopName;
+      var userId = fixtures.Subscription.sub3.subscriptions[0].userId;
 
       request(app)
         .delete(apiSuffix + '/' + shopName + '/' + userId)

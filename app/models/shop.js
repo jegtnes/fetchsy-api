@@ -10,7 +10,7 @@ var subscriptionSchema = new Schema({
 
 var shopSchema = new Schema({
   shopName: String,
-  subscriptions: []
+  subscriptions: [subscriptionSchema]
 });
 
 shopSchema.plugin(findOrCreate);

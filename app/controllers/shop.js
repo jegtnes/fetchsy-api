@@ -117,6 +117,32 @@ shopController.updateSubscription = function(req, res) {
   });
 };
 
+shopController.deleteSubscription = function(req, res) {
+  Shop.findOneAndUpdate(
+    {
+      shopName: req.params.shopName
+    },
+    {
+      $pull: {
+        subscriptions: {
+          userId: req.params.userId
+        }
+      }
+    },
+    function(err, subscriptionResponse) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+
+      if (!subscriptionResponse) {
+        return res.status(404).send({message: "Subscription not found. Soz!"});
+      }
+
+      return res.status(204).end();
+    }
+  );
+};
+
 
 
 module.exports = shopController;
