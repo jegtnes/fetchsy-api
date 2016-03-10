@@ -52,29 +52,27 @@ shopController.postSubscription = function(req, res) {
           return res.status(500).send(err);
         }
 
-        // if there's no response to inner query, there's no duplicate
-        // go ahead and add it to the collection
-        if (!subscriptionResponse) {
-          shop.subscriptions.push({
-            frequency: req.body.frequency,
-            userId: req.body.userId,
-            lastChecked: Date.now()
-          });
-
-          shop.save(function(err) {
-            if (err) {
-              return res.status(500).send(err);
-            }
-
-            resourceURI = env.apiURL + 'shops/' + shop.shopName + '/' + req.body.userId;
-
-            return res.status(201).header('Location', resourceURI).end();
-          });
-        }
-
-        else {
+        if (subscriptionResponse) {
           return res.status(422).send({message: 'duplicate description dawg'})
         }
+
+        // if there's no response to inner query, there's no duplicate
+        // go ahead and add it to the collection
+        shop.subscriptions.push({
+          frequency: req.body.frequency,
+          userId: req.body.userId,
+          lastChecked: Date.now()
+        });
+
+        shop.save(function(err) {
+          if (err) {
+            return res.status(500).send(err);
+          }
+
+          resourceURI = env.apiURL + 'shops/' + shop.shopName + '/' + req.body.userId;
+
+          return res.status(201).header('Location', resourceURI).end();
+        });
       }
     );
   });
