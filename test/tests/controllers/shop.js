@@ -64,7 +64,6 @@ describe('Shop', function() {
         .get(apiSuffix + '/' + shopName + '/' + userId)
         .set(authHeader)
         .end(function(err, res) {
-          console.log(res.body);
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
