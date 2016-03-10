@@ -105,8 +105,8 @@ describe('Shop', function() {
     var duplicateFixture = fixtures.Subscription.sub1;
 
     subscription.shopName = duplicateFixture.shopName;
-    subscription.frequency = duplicateFixture.frequency;
-    subscription.userId = duplicateFixture.userId;
+    subscription.frequency = duplicateFixture.subscriptions[0].frequency;
+    subscription.userId = duplicateFixture.subscriptions[0].userId;
 
     request(app)
       .post(apiSuffix + '/' + subscription.shopName)

@@ -27,7 +27,10 @@ shopController.getShop = function(req, res) {
   });
 };
 
+// @TODO: This is horrendous. Please refactor this, Alex 😭
 shopController.postSubscription = function(req, res) {
+
+  // if this is the shop's first sub, create it
   Shop.findOrCreate({shopName: req.params.shopName}, function(err, shop) {
     if (err) {
       res.send(err);
@@ -37,21 +40,43 @@ shopController.postSubscription = function(req, res) {
       return res.status(400).json({message: 'Missing fields dawg'});
     }
 
-    shop.subscriptions.push({
-      frequency: req.body.frequency,
-      userId: req.body.userId,
-      lastChecked: Date.now()
-    });
+    // check for duplicates
+    Shop.findOne(
+      {
+      shopName: req.params.shopName,
+      'subscriptions.userId': req.body.userId,
+      },
+      { 'subscriptions.$': 1 },
+      function(err, subscriptionResponse) {
+        if (err) {
+          return res.status(500).send(err);
+        }
 
-    shop.save(function(err) {
-      if (err) {
-        return res.status(500).send(err);
+        // if there's no response to inner query, there's no duplicate
+        // go ahead and add it to the collection
+        if (!subscriptionResponse) {
+          shop.subscriptions.push({
+            frequency: req.body.frequency,
+            userId: req.body.userId,
+            lastChecked: Date.now()
+          });
+
+          shop.save(function(err) {
+            if (err) {
+              return res.status(500).send(err);
+            }
+
+            resourceURI = env.apiURL + 'shops/' + shop.shopName + '/' + req.body.userId;
+
+            return res.status(201).header('Location', resourceURI).end();
+          });
+        }
+
+        else {
+          return res.status(422).send({message: 'duplicate description dawg'})
+        }
       }
-
-      resourceURI = env.apiURL + '/shops/' + shop.subscriptions[0].frequency + '/' + shop.subscriptions[0]._id;
-
-      return res.status(201).header('Location', resourceURI).end();
-    });
+    );
   });
 };
 

@@ -9,9 +9,19 @@ var subscriptionSchema = new Schema({
 });
 
 var shopSchema = new Schema({
-  shopName: String,
-  subscriptions: [subscriptionSchema]
+  shopName: {
+    type: String,
+    unique: true
+  },
+  subscriptions: {
+    type: [subscriptionSchema]
+  }
 });
+
+shopSchema.index(
+  { shopName: 1, "subscriptions.userId": 1 },
+  { unique: true, sparse: true }
+)
 
 shopSchema.plugin(findOrCreate);
 
