@@ -79,9 +79,10 @@ describe('Shop', function() {
   describe('create subscription to shop', function() {
     it('should create a subscription', function(done) {
       var shopName = fixtures.Subscription.sub1.shopName;
+      var user = fixtures.User.user3._id;
       var subscription = {
         frequency: 30,
-        userId: 'temp'
+        userId: user
       };
 
       request(app)
@@ -127,7 +128,7 @@ describe('Shop', function() {
     };
 
     request(app)
-      .post(apiSuffix)
+      .post(apiSuffix + '/' + subscription.shopName)
       .set(authHeader)
       .type('form')
       .send(subscription)

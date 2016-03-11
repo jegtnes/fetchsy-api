@@ -2,6 +2,7 @@ var express = require('express');
 
 var env = require('../env');
 var Shop = require('../models/shop.js');
+var User = require('../models/user.js');
 
 var shopController = {};
 
@@ -40,41 +41,48 @@ shopController.postSubscription = function(req, res) {
       return res.status(400).json({message: 'Missing fields dawg'});
     }
 
-    // check for duplicates
-    Shop.findOne(
-      {
-      shopName: req.params.shopName,
-      'subscriptions.userId': req.body.userId,
-      },
-      { 'subscriptions.$': 1 },
-      function(err, subscriptionResponse) {
-        if (err) {
-          return res.status(500).send(err);
-        }
+    User.findOne({_id: req.body.userId}, function(err, user) {
+      // check if user exists
+      if (!user) {
+        return res.status(422).send({message: "Can't find the user to update the subscription"});
+      }
 
-        if (subscriptionResponse) {
-          return res.status(422).send({message: 'duplicate description dawg'})
-        }
-
-        // if there's no response to inner query, there's no duplicate
-        // go ahead and add it to the collection
-        shop.subscriptions.push({
-          frequency: req.body.frequency,
-          userId: req.body.userId,
-          lastChecked: Date.now()
-        });
-
-        shop.save(function(err) {
+      // check for duplicates
+      Shop.findOne(
+        {
+        shopName: req.params.shopName,
+        'subscriptions.userId': req.body.userId,
+        },
+        { 'subscriptions.$': 1 },
+        function(err, subscriptionResponse) {
           if (err) {
             return res.status(500).send(err);
           }
 
-          resourceURI = env.apiURL + 'shops/' + shop.shopName + '/' + req.body.userId;
+          if (subscriptionResponse) {
+            return res.status(422).send({message: 'duplicate description dawg'})
+          }
 
-          return res.status(201).header('Location', resourceURI).end();
-        });
-      }
-    );
+          // if there's no response to inner query, there's no duplicate
+          // go ahead and add it to the collection
+          shop.subscriptions.push({
+            frequency: req.body.frequency,
+            userId: req.body.userId,
+            lastChecked: Date.now()
+          });
+
+          shop.save(function(err) {
+            if (err) {
+              return res.status(500).send(err);
+            }
+
+            resourceURI = env.apiURL + 'shops/' + shop.shopName + '/' + req.body.userId;
+
+            return res.status(201).header('Location', resourceURI).end();
+          });
+        }
+      );
+    });
   });
 };
 
