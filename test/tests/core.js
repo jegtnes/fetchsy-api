@@ -9,12 +9,14 @@ before(function(done) {
 });
 
 beforeEach(function(done) {
+  this.timeout(5000);
   fixtures.load('../fixtures/fixtures.js', mongoose.connection, function() {
     done();
   });
 });
 
 afterEach(function(done) {
+  this.timeout(5000);
   mockgoose.reset(function() {
     done();
   });
