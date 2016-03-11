@@ -1,7 +1,8 @@
 var express = require('express');
 
-var subscriptionsController = require('./controllers/subscription.js');
-var usersController = require('./controllers/user.js');
+var subscriptionsController = require('./controllers/subscription');
+var shopController = require('./controllers/shop');
+var usersController = require('./controllers/user');
 var authController = require('./controllers/auth');
 
 var router = express.Router();
@@ -11,14 +12,17 @@ router.route('/')
     res.json({message: "hello world"});
   })
 
-router.route('/subscriptions')
-  .get(authController.isAuthenticated, subscriptionsController.getSubscriptions)
-  .post(authController.isAuthenticated, subscriptionsController.postSubscription);
+router.route('/shops')
+  .get(authController.isAuthenticated, shopController.getShops)
 
-router.route('/subscriptions/:subscriptionId')
-  .get(authController.isAuthenticated, subscriptionsController.getSubscription)
-  .put(authController.isAuthenticated, subscriptionsController.putSubscription)
-  .delete(authController.isAuthenticated, subscriptionsController.deleteSubscription);
+router.route('/shops/:shopName')
+  .get(authController.isAuthenticated, shopController.getShop)
+  .post(authController.isAuthenticated, shopController.postSubscription)
+
+router.route('/shops/:shopName/:userId')
+  .get(authController.isAuthenticated, shopController.getSubscription)
+  .put(authController.isAuthenticated, shopController.updateSubscription)
+  .delete(authController.isAuthenticated, shopController.deleteSubscription);
 
 router.route('/users')
   .get(authController.isAuthenticated, usersController.getUsers)

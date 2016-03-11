@@ -6,7 +6,7 @@ var conf =         require('./app/config');
 var env =          require('./app/env');
 var router =       require('./app/routes');
 
-var Subscription = require('./app/models/subscription');
+var Shop = require('./app/models/shop');
 mongoose.connect(conf.get('dbUrl'));
 
 var app = express();
