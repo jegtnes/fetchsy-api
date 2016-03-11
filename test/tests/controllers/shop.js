@@ -98,45 +98,45 @@ describe('Shop', function() {
           done();
         });
     });
-  });
 
-  it('should not create a duplicate subscription', function(done) {
-    var subscription = {};
-    var duplicateFixture = fixtures.Subscription.sub1;
+    it('should not create a duplicate subscription', function(done) {
+      var subscription = {};
+      var duplicateFixture = fixtures.Subscription.sub1;
 
-    subscription.shopName = duplicateFixture.shopName;
-    subscription.frequency = duplicateFixture.subscriptions[0].frequency;
-    subscription.userId = duplicateFixture.subscriptions[0].userId;
+      subscription.shopName = duplicateFixture.shopName;
+      subscription.frequency = duplicateFixture.subscriptions[0].frequency;
+      subscription.userId = duplicateFixture.subscriptions[0].userId;
 
-    request(app)
-      .post(apiSuffix + '/' + subscription.shopName)
-      .set(authHeader)
-      .type('form')
-      .send(subscription)
-      .end(function(err, res) {
-        expect(res.statusCode).to.equal(422);
-        expect(res.body.message).to.exist;
-        done();
-      })
-  });
+      request(app)
+        .post(apiSuffix + '/' + subscription.shopName)
+        .set(authHeader)
+        .type('form')
+        .send(subscription)
+        .end(function(err, res) {
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.message).to.exist;
+          done();
+        })
+    });
 
-  it('should not create a subscription if the userId doesn\'t exist', function(done) {
-    var subscription = {
-      shopName: "Artisanal Artisans",
-      frequency: 30,
-      userId: "cantbebotheredgeneratingamongodbuserid"
-    };
+    it('should not create a subscription if the userId doesn\'t exist', function(done) {
+      var subscription = {
+        shopName: "Artisanal Artisans",
+        frequency: 30,
+        userId: "cantbebotheredgeneratingamongodbuserid"
+      };
 
-    request(app)
-      .post(apiSuffix + '/' + subscription.shopName)
-      .set(authHeader)
-      .type('form')
-      .send(subscription)
-      .end(function(err, res) {
-        expect(res.statusCode).to.equal(422);
-        expect(res.body.message).to.exist;
-        done();
-      })
+      request(app)
+        .post(apiSuffix + '/' + subscription.shopName)
+        .set(authHeader)
+        .type('form')
+        .send(subscription)
+        .end(function(err, res) {
+          expect(res.statusCode).to.equal(422);
+          expect(res.body.message).to.exist;
+          done();
+        })
+    });
   });
 
   describe('update subscription', function() {

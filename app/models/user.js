@@ -1,5 +1,3 @@
-// @TODO: Rudimentary password strength check
-
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 var validator = require('validator');

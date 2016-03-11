@@ -1,6 +1,5 @@
 var express = require('express');
 
-var subscriptionsController = require('./controllers/subscription');
 var shopController = require('./controllers/shop');
 var usersController = require('./controllers/user');
 var authController = require('./controllers/auth');
