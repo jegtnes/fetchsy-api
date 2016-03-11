@@ -146,8 +146,8 @@ describe('User routes', function() {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.email).to.be.ok;
+          done();
         })
-      done();
     });
   });
 });
