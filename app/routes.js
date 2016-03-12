@@ -2,6 +2,7 @@ var express = require('express');
 
 var shopController = require('./controllers/shop');
 var usersController = require('./controllers/user');
+var feedController = require('./controllers/feed');
 var authController = require('./controllers/auth');
 
 var router = express.Router();
@@ -17,6 +18,9 @@ router.route('/shops')
 router.route('/shops/:shopName')
   .get(authController.isAuthenticated, shopController.getShop)
   .post(authController.isAuthenticated, shopController.postSubscription)
+
+router.route('/shops/:shopName/feed')
+  .get(authController.isAuthenticated, feedController.getFeed);
 
 router.route('/shops/:shopName/:userId')
   .get(authController.isAuthenticated, shopController.getSubscription)
