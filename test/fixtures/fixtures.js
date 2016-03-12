@@ -88,7 +88,7 @@ var Subscription = {
       frequency: 15
     }]
   },
-  sub5: {
+  sub6: {
     _id: new mongoose.Types.ObjectId,
     shopName: "TimberstoneTurnings",
     subscriptions: [{
