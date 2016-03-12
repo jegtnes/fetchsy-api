@@ -79,6 +79,24 @@ var Subscription = {
       },
     ]
   },
+  sub5: {
+    _id: new mongoose.Types.ObjectId,
+    shopName: "WarcraftsByEuphyley",
+    subscriptions: [{
+      lastChecked: Date.now(),
+      userId: User.user1._id,
+      frequency: 15
+    }]
+  },
+  sub5: {
+    _id: new mongoose.Types.ObjectId,
+    shopName: "TimberstoneTurnings",
+    subscriptions: [{
+      lastChecked: Date.now(),
+      userId: User.user1._id,
+      frequency: 60
+    }]
+  },
 }
 
 module.exports.User = User;
