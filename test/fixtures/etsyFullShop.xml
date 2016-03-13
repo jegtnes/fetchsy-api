@@ -12,5 +12,17 @@
     <pubDate>Sat, 12 Mar 2016 14:26:34 -0500</pubDate>
     <link>https://www.etsy.com/listing/1/aNiceItem</link>        <guid>https://www.etsy.com/listing/1/aNiceItem2357810794</guid>
   </item>
+  <item>
+    <title>Nice item 2</title>
+    <description>A second nice item.</description>
+    <pubDate>Sat, 12 Mar 2016 13:26:34 -0500</pubDate>
+    <link>https://www.etsy.com/listing/2/aNiceItem2</link>        <guid>https://www.etsy.com/listing/2/aNiceItem22357810794</guid>
+  </item>
+  <item>
+    <title>Nice item 3</title>
+    <description>A third nice item.</description>
+    <pubDate>Sat, 12 Mar 2016 19:26:35 +0100</pubDate>
+    <link>https://www.etsy.com/listing/3/aNiceItem<3/link>        <guid>https://www.etsy.com/listing/3/aNiceItem32357810794</guid>
+  </item>
 </channel>
 </rss>
