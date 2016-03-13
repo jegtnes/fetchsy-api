@@ -97,6 +97,15 @@ var Subscription = {
       frequency: 60
     }]
   },
+  sub7: {
+    _id: new mongoose.Types.ObjectId,
+    shopName: "MockNonexistentShop",
+    subscriptions: [{
+      lastChecked: Date.now(),
+      userId: User.user1._id,
+      frequency: 60
+    }]
+  },
 }
 
 module.exports.User = User;
