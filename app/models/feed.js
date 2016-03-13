@@ -8,10 +8,11 @@ var getFeed = function(feedURI, callback) {
     .parse(xmlParser)
     .end(function(err, res) {
       if (err) {
-        callback(new Error({
+        callback({
           message: 'Error in processing Etsy response',
+          errorCode: 404,
           errors: [err]
-        }));
+        });
       }
 
       else {
