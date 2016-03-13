@@ -81,7 +81,7 @@ var Subscription = {
   },
   sub5: {
     _id: new mongoose.Types.ObjectId,
-    shopName: "WarcraftsByEuphyley",
+    shopName: "MockFullShop",
     subscriptions: [{
       lastChecked: Date.now(),
       userId: User.user1._id,
@@ -90,7 +90,7 @@ var Subscription = {
   },
   sub6: {
     _id: new mongoose.Types.ObjectId,
-    shopName: "TimberstoneTurnings",
+    shopName: "MockEmptyShop",
     subscriptions: [{
       lastChecked: Date.now(),
       userId: User.user1._id,
