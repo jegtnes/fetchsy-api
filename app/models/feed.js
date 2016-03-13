@@ -14,9 +14,10 @@ var getFeed = function(feedURI, callback) {
         }));
       }
 
-      var items = res.body.rss.channel[0].item ? res.body.rss.channel[0].item : [];
-
-      callback(null, items);
+      else {
+        var items = res.body.rss.channel[0].item ? res.body.rss.channel[0].item : [];
+        callback(null, items);
+      }
     });
 }
 
