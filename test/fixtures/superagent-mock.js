@@ -16,18 +16,32 @@ module.exports = [{
       var file = fs.readFileSync(__dirname + '/etsyEmptyShop.xml', 'utf8');
       return file;
     }
+
+    if (match[1] === 'MockNonexistentShop') {
+      var file = fs.readFileSync(__dirname + '/etsyNonexistentShop.html', 'utf8');
+      return file;
+    }
   },
 
   get: function (match, data) {
-    var json = false;
+
+    var returnObject = {
+      xmlErr: false,
+      body: false,
+      code: 200,
+    }
+
     xml2js(data, function(err, result) {
-      json = result;
+      if (err) {
+        returnObject.xmlErr = err;
+        returnObject.statusCode = 404;
+        returnObject.body = {'message': "This shop's feed can't be found. It may be deleted or there might be a temporary glitch with Etsy's RSS feeds. Please check back later!"};
+      }
+      else {
+        returnObject.body = result;
+      }
     });
 
-    return {
-      match: match,
-      body: json,
-      code: 200
-    };
+    return returnObject;
   },
 }]

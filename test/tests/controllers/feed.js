@@ -41,5 +41,18 @@ describe('Feed', function() {
           done();
         });
     });
+
+    it('should warn when a shop no longer exists', function(done) {
+      var fixtureId = fixtures.Subscription.sub7.shopName;
+      request(app)
+        .get(apiSuffix + '/' + fixtureId + '/feed')
+        .set(authHeader)
+        .end(function(err, res) {
+          // console.log('error:', err);
+          // console.log('res:', res);
+          expect(res.statusCode).to.equal(404);
+          done();
+        });
+    });
   });
 });

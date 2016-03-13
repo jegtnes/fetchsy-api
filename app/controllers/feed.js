@@ -11,7 +11,7 @@ var router = express.Router();
 feedController.getFeed = function(req, res) {
   Feed.getFeed(etsyURI + req.params.shopName + '/rss', function(err, feedItems) {
     if (err) {
-      res.status(500).send(err);
+      res.status(err.errorCode ? err.errorCode : 500).send(err);
     }
 
     if (feedItems.length === 0) {
