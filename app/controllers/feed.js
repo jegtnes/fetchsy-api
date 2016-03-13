@@ -2,7 +2,7 @@ var express = require('express');
 
 var env = require('../env');
 var conf = require('../config');
-var etsyURI = 'https://www.etsy.com/shop/';
+var etsyURI = conf.get('etsyBaseURI');
 
 var Feed = require('../models/feed');
 var feedController = {};

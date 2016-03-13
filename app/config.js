@@ -30,6 +30,11 @@ var conf = convict({
     default: false,
     env: "API_KEY"
   },
+  etsyBaseURI: {
+    doc: "The baseline URI to access an Etsy shop",
+    format: String,
+    default: "https://www.etsy.com/shop/"
+  },
   dbUrl: {
     doc: "Database URL",
     format: String,
