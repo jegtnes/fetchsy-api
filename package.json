@@ -45,6 +45,7 @@
     "shipit-deploy": "2.1.2",
     "shipit-pm2": "0.0.4",
     "shipit-shared": "^4.4.1",
+    "superagent-mock": "^1.10.0",
     "supertest": "^1.2.0"
   }
 }
