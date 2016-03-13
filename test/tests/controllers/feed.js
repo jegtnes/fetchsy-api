@@ -65,8 +65,6 @@ describe('Feed', function() {
         .get(apiSuffix + '/' + fixtureId + '/feed')
         .set(authHeader)
         .end(function(err, res) {
-          // console.log('error:', err);
-          // console.log('res:', res);
           expect(res.statusCode).to.equal(404);
           done();
         });
