@@ -73,7 +73,7 @@ describe('Feed', function() {
     });
 
     it('should show only some items if a "since" filter has been applied', function(done) {
-      var fixtureId = fixtures.Subscription.sub5.shopName;
+      var fixtureId = fixtures.Subscription.sub8.shopName;
       var timestamp = moment('Sat, 12 Mar 2016 13:26:34 -0500', 'ddd, DD MMM YYYY HH:mm:ss ZZ').valueOf();
 
       request(app)
