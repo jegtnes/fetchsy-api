@@ -21,8 +21,8 @@
     "url-join": "0.0.1"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha -R nyan test/tests --recursive",
-    "test:watch": "npm run test -- -w",
+    "test": "NODE_ENV=test mocha -R dot test/tests --recursive",
+    "test:watch": "npm run test -- -w -R min",
     "start": "nodemon app.js"
   },
   "repository": {
