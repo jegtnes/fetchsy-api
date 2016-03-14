@@ -19,14 +19,13 @@ app.use(bodyParser.urlencoded({
 
 describe('Feed', function() {
   describe('show feed', function() {
-    it('should show a single feed with items', function(done) {
+    it('should warn when a shop no longer exists', function(done) {
       var fixtureId = fixtures.Subscription.sub5.shopName;
       request(app)
         .get(apiSuffix + '/' + fixtureId + '/feed')
         .set(authHeader)
         .end(function(err, res) {
-          expect(err).to.equal(null);
-          expect(res.statusCode).to.equal(200);
+          expect(res.statusCode).to.equal(404);
           done();
         });
     });
@@ -43,6 +42,30 @@ describe('Feed', function() {
         });
     });
 
+    it('should show a single feed with one item', function(done) {
+      var fixtureId = fixtures.Subscription.sub7.shopName;
+      request(app)
+        .get(apiSuffix + '/' + fixtureId + '/feed')
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          done();
+        });
+    });
+
+    it('should show a single feed with multiple items', function(done) {
+      var fixtureId = fixtures.Subscription.sub8.shopName;
+      request(app)
+        .get(apiSuffix + '/' + fixtureId + '/feed')
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          done();
+        });
+    });
+
     it('should show only some items if a "since" filter has been applied', function(done) {
       var fixtureId = fixtures.Subscription.sub5.shopName;
       var timestamp = moment('Sat, 12 Mar 2016 13:26:34 -0500', 'ddd, DD MMM YYYY HH:mm:ss ZZ').valueOf();
@@ -55,17 +78,6 @@ describe('Feed', function() {
           expect(err).to.equal(null);
           expect(res.statusCode).to.equal(200);
           expect(res.body.length).to.equal(2);
-          done();
-        });
-    });
-
-    it('should warn when a shop no longer exists', function(done) {
-      var fixtureId = fixtures.Subscription.sub7.shopName;
-      request(app)
-        .get(apiSuffix + '/' + fixtureId + '/feed')
-        .set(authHeader)
-        .end(function(err, res) {
-          expect(res.statusCode).to.equal(404);
           done();
         });
     });

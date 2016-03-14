@@ -7,8 +7,8 @@ var conf = require('../../app/config');
 module.exports = [{
   pattern: conf.get('etsyBaseURI') + '(.*)/rss',
   fixtures: function(match, params, headers) {
-    if (match[1] === 'MockFullShop') {
-      var file = fs.readFileSync(__dirname + '/etsyFullShop.xml', 'utf8');
+    if (match[1] === 'MockNonexistentShop') {
+      var file = fs.readFileSync(__dirname + '/etsyNonexistentShop.html', 'utf8');
       return file;
     }
 
@@ -17,8 +17,13 @@ module.exports = [{
       return file;
     }
 
-    if (match[1] === 'MockNonexistentShop') {
-      var file = fs.readFileSync(__dirname + '/etsyNonexistentShop.html', 'utf8');
+    if (match[1] === 'MockSingleShop') {
+      var file = fs.readFileSync(__dirname + '/etsySingleShop.xml', 'utf8');
+      return file;
+    }
+
+    if (match[1] === 'MockFullShop') {
+      var file = fs.readFileSync(__dirname + '/etsyFullShop.xml', 'utf8');
       return file;
     }
   },

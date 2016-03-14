@@ -81,7 +81,7 @@ var Subscription = {
   },
   sub5: {
     _id: new mongoose.Types.ObjectId,
-    shopName: "MockFullShop",
+    shopName: "MockNonexistentShop",
     subscriptions: [{
       lastChecked: Date.now(),
       userId: User.user1._id,
@@ -99,7 +99,16 @@ var Subscription = {
   },
   sub7: {
     _id: new mongoose.Types.ObjectId,
-    shopName: "MockNonexistentShop",
+    shopName: "MockSingleShop",
+    subscriptions: [{
+      lastChecked: Date.now(),
+      userId: User.user1._id,
+      frequency: 60
+    }]
+  },
+  sub8: {
+    _id: new mongoose.Types.ObjectId,
+    shopName: "MockFullShop",
     subscriptions: [{
       lastChecked: Date.now(),
       userId: User.user1._id,
