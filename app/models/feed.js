@@ -18,6 +18,11 @@ var getFeed = function(feedURI, options, callback) {
 
       else {
         var items = res.body.rss.channel[0].item ? res.body.rss.channel[0].item : [];
+
+        if (options.since) {
+          items = _filterFeedByTimestamp(items, options.since);
+        }
+
         callback(null, items);
       }
     });
@@ -28,6 +33,12 @@ var etsyTimeToTimestamp = function(timestamp) {
   return moment(timestamp, 'ddd, DD MMM YYYY HH:mm:ss ZZ').valueOf();
 }
 
+var _filterFeedByTimestamp = function(feed, timestamp) {
+  return feed.filter(function(item) {
+    var feedTimestamp = etsyTimeToTimestamp(item.pubDate);
+    return feedTimestamp > timestamp;
+  });
+}
 
 module.exports.etsyTimeToTimestamp = etsyTimeToTimestamp;
 module.exports.getFeed = getFeed;
