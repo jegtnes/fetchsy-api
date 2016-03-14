@@ -1,8 +1,25 @@
 {
   "name": "fetchsy-api",
   "version": "1.0.0",
+  "author": "Alex Jegtnes <alex@jegtnes.co.uk> (http://jegtnes.co.uk)",
   "description": "",
-  "main": "index.js",
+  "homepage": "https://github.com/jegtnes/fetchsy-api#readme",
+  "main": "app.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha -R dot test/tests --recursive",
+    "test:watch": "npm run test -- -w -R min",
+    "start": "nodemon app.js"
+  },
+  "bugs": {
+    "url": "https://github.com/jegtnes/fetchsy-api/issues"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jegtnes/fetchsy-api.git"
+  },
+
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
@@ -20,22 +37,6 @@
     "superagent-xml2jsparser": "^0.1.1",
     "url-join": "0.0.1"
   },
-  "scripts": {
-    "test": "NODE_ENV=test mocha -R dot test/tests --recursive",
-    "test:watch": "npm run test -- -w -R min",
-    "start": "nodemon app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jegtnes/fetchsy-api.git"
-  },
-  "keywords": [],
-  "author": "Alex Jegtnes <alex@jegtnes.co.uk> (http://jegtnes.co.uk)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jegtnes/fetchsy-api/issues"
-  },
-  "homepage": "https://github.com/jegtnes/fetchsy-api#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-things": "^0.2.0",
