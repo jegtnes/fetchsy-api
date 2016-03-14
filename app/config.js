@@ -22,7 +22,7 @@ var conf = convict({
   apiSuffix: {
     doc: "The suffix URL fragment to access the API.",
     format: String,
-    default: "/api/v1/"
+    default: "/v1/"
   },
   apiKey: {
     doc: "Admin API key to access API",
