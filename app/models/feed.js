@@ -1,7 +1,7 @@
 var request = require('superagent');
 var xmlParser = require('superagent-xml2jsparser');
 
-var getFeed = function(feedURI, callback) {
+var getFeed = function(feedURI, options, callback) {
   request
     .get(feedURI)
     .accept('xml')
@@ -21,5 +21,7 @@ var getFeed = function(feedURI, callback) {
       }
     });
 }
+
+
 
 module.exports.getFeed = getFeed;
