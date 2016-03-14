@@ -12,20 +12,20 @@ var apiSuffix = conf.get('apiSuffix') + "shops";
 var authHeader = {'Authorization': 'Bearer ' + conf.get('apiKey')}
 
 var app = require('../../../app');
+var Feed = require('../../../app/models/feed');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
 describe('Feed', function() {
   describe('show feed', function() {
-    it('should show a single feed with items', function(done) {
+    it('should warn when a shop no longer exists', function(done) {
       var fixtureId = fixtures.Subscription.sub5.shopName;
       request(app)
         .get(apiSuffix + '/' + fixtureId + '/feed')
         .set(authHeader)
         .end(function(err, res) {
-          expect(err).to.equal(null);
-          expect(res.statusCode).to.equal(200);
+          expect(res.statusCode).to.equal(404);
           done();
         });
     });
@@ -37,20 +37,53 @@ describe('Feed', function() {
         .set(authHeader)
         .end(function(err, res) {
           expect(err).to.equal(null);
+          expect(res.body).to.be.an.object;
+          expect(res.body).to.be.empty;
           expect(res.statusCode).to.equal(204);
           done();
         });
     });
 
-    it('should warn when a shop no longer exists', function(done) {
+    it('should show a single feed with one item', function(done) {
       var fixtureId = fixtures.Subscription.sub7.shopName;
       request(app)
         .get(apiSuffix + '/' + fixtureId + '/feed')
         .set(authHeader)
         .end(function(err, res) {
-          // console.log('error:', err);
-          // console.log('res:', res);
-          expect(res.statusCode).to.equal(404);
+          expect(err).to.equal(null);
+          expect(res.body).to.not.be.empty;
+          expect(res.body.length).to.equal(1);
+          expect(res.statusCode).to.equal(200);
+          done();
+        });
+    });
+
+    it('should show a single feed with multiple items', function(done) {
+      var fixtureId = fixtures.Subscription.sub8.shopName;
+      request(app)
+        .get(apiSuffix + '/' + fixtureId + '/feed')
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.body).to.not.be.empty;
+          expect(res.body.length).to.equal(6);
+          expect(res.statusCode).to.equal(200);
+          done();
+        });
+    });
+
+    it('should show only some items if a "since" filter has been applied', function(done) {
+      var fixtureId = fixtures.Subscription.sub8.shopName;
+      var timestamp = Feed.etsyTimeToTimestamp('Sat, 12 Mar 2016 13:26:34 -0500', 'ddd, DD MMM YYYY HH:mm:ss ZZ').valueOf();
+
+      request(app)
+        .get(apiSuffix + '/' + fixtureId + '/feed')
+        .query({since: timestamp})
+        .set(authHeader)
+        .end(function(err, res) {
+          expect(err).to.equal(null);
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.length).to.equal(2);
           done();
         });
     });

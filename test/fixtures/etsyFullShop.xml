@@ -12,5 +12,35 @@
     <pubDate>Sat, 12 Mar 2016 14:26:34 -0500</pubDate>
     <link>https://www.etsy.com/listing/1/aNiceItem</link>        <guid>https://www.etsy.com/listing/1/aNiceItem2357810794</guid>
   </item>
+  <item>
+    <title>Nice item 2</title>
+    <description>A second nice item.</description>
+    <pubDate>Sat, 12 Mar 2016 13:26:34 -0500</pubDate>
+    <link>https://www.etsy.com/listing/2/aNiceItem2</link>        <guid>https://www.etsy.com/listing/2/aNiceItem22357810794</guid>
+  </item>
+  <item>
+    <title>Nice item 3</title>
+    <description>A third nice item.</description>
+    <pubDate>Sat, 12 Mar 2016 19:26:35 +0100</pubDate>
+    <link>https://www.etsy.com/listing/3/aNiceItem</link>        <guid>https://www.etsy.com/listing/3/aNiceItem32357810794</guid>
+  </item>
+  <item>
+    <title>Nice item 4</title>
+    <description>A fourth nice item.</description>
+    <pubDate>Fri, 11 Mar 2016 13:26:35 +1300</pubDate>
+    <link>https://www.etsy.com/listing/4/aNiceItem</link>        <guid>https://www.etsy.com/listing/4/aNiceItem42357810794</guid>
+  </item>
+  <item>
+    <title>Nice item 5</title>
+    <description>A fifth nice item.</description>
+    <pubDate>Fri, 11 Mar 2016 13:26:35 -1200</pubDate>
+    <link>https://www.etsy.com/listing/5/aNiceItem</link>        <guid>https://www.etsy.com/listing/5/aNiceItem52357810794</guid>
+  </item>
+  <item>
+    <title>Nice item 6</title>
+    <description>A sixth nice item.</description>
+    <pubDate>Thu, 10 Mar 2016 19:26:35 +0100</pubDate>
+    <link>https://www.etsy.com/listing/6/aNiceItem</link>        <guid>https://www.etsy.com/listing/6/aNiceItem52357810794</guid>
+  </item>
 </channel>
 </rss>
