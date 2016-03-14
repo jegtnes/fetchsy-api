@@ -12,7 +12,7 @@ var apiSuffix = conf.get('apiSuffix') + "shops";
 var authHeader = {'Authorization': 'Bearer ' + conf.get('apiKey')}
 
 var app = require('../../../app');
-var moment = require('moment');
+var Feed = require('../../../app/models/feed');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -74,7 +74,7 @@ describe('Feed', function() {
 
     it('should show only some items if a "since" filter has been applied', function(done) {
       var fixtureId = fixtures.Subscription.sub8.shopName;
-      var timestamp = moment('Sat, 12 Mar 2016 13:26:34 -0500', 'ddd, DD MMM YYYY HH:mm:ss ZZ').valueOf();
+      var timestamp = Feed.etsyTimeToTimestamp('Sat, 12 Mar 2016 13:26:34 -0500', 'ddd, DD MMM YYYY HH:mm:ss ZZ').valueOf();
 
       request(app)
         .get(apiSuffix + '/' + fixtureId + '/feed')

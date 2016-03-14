@@ -1,5 +1,6 @@
 var request = require('superagent');
 var xmlParser = require('superagent-xml2jsparser');
+var moment = require('moment');
 
 var getFeed = function(feedURI, options, callback) {
   request
@@ -22,6 +23,11 @@ var getFeed = function(feedURI, options, callback) {
     });
 }
 
+// @TODO: Unit test this pls
+var etsyTimeToTimestamp = function(timestamp) {
+  return moment(timestamp, 'ddd, DD MMM YYYY HH:mm:ss ZZ').valueOf();
+}
 
 
+module.exports.etsyTimeToTimestamp = etsyTimeToTimestamp;
 module.exports.getFeed = getFeed;
