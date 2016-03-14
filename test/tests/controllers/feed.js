@@ -37,6 +37,8 @@ describe('Feed', function() {
         .set(authHeader)
         .end(function(err, res) {
           expect(err).to.equal(null);
+          expect(res.body).to.be.an.object;
+          expect(res.body).to.be.empty;
           expect(res.statusCode).to.equal(204);
           done();
         });
