@@ -41,7 +41,7 @@
     "chai": "^3.5.0",
     "chai-things": "^0.2.0",
     "mocha": "^2.4.5",
-    "mockgoose": "^6.0.0",
+    "mockgoose": "^6.0.3",
     "pow-mongoose-fixtures": "^0.3.0",
     "shipit-cli": "^1.4.1",
     "shipit-deploy": "2.1.2",
