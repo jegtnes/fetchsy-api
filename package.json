@@ -43,7 +43,7 @@
     "mocha": "^3.0.0",
     "mockgoose": "^6.0.3",
     "pow-mongoose-fixtures": "^0.3.0",
-    "shipit-cli": "^1.4.1",
+    "shipit-cli": "^1.5.0",
     "shipit-deploy": "2.2.0",
     "shipit-pm2": "0.0.4",
     "shipit-shared": "^4.4.1",
