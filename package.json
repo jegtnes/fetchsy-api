@@ -40,7 +40,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-things": "^0.2.0",
-    "mocha": "^3.0.0",
+    "mocha": "^3.1.1",
     "mockgoose": "^6.0.3",
     "pow-mongoose-fixtures": "^0.3.0",
     "shipit-cli": "^1.4.1",
