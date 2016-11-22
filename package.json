@@ -46,7 +46,7 @@
     "shipit-cli": "^1.4.1",
     "shipit-deploy": "2.2.0",
     "shipit-pm2": "0.0.4",
-    "shipit-shared": "^4.4.1",
+    "shipit-shared": "^4.4.2",
     "superagent-mock": "^1.10.0",
     "supertest": "^2.0.0",
     "xml2js": "^0.4.16"
