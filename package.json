@@ -35,7 +35,7 @@
     "superagent": "^2.1.0",
     "superagent-xml2jsparser": "^0.1.1",
     "url-join": "1.1.0",
-    "validator": "^5.1.0"
+    "validator": "^6.2.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
